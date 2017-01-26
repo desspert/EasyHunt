@@ -16,12 +16,12 @@ public:
 	
 	std::shared_ptr<SceneBase> scene;
 	void setup();
-	void update();
+	void update(const int& delta_frame);
 	void draw();
 	void shift(const SceneName& scene);
-	void touchesBegan(TouchEvent event);
-	void touchesMoved(TouchEvent event);
-	void touchesEnded(TouchEvent event);
+	void touchesBegan(ci::app::TouchEvent event);
+	void touchesMoved(ci::app::TouchEvent event);
+	void touchesEnded(ci::app::TouchEvent event);
 	void mouseDown(const ci::app::MouseEvent& event);
 	void mouseDrag(const ci::app::MouseEvent& event);
 	void mouseUp(const ci::app::MouseEvent& event);

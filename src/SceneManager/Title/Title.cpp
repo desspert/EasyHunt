@@ -1,9 +1,9 @@
 #include "Title.h"
 
-void Title::update()
+void Title::update(const int& delta_frame)
 {
 	
-	ui.update();
+	ui.update(delta_frame);
 	
 }
 
@@ -21,15 +21,15 @@ void Title::setup()
 	
 }
 
-void Title::touchesBegan(TouchEvent event)
+void Title::touchesBegan(ci::app::TouchEvent event)
 {
 }
 
-void Title::touchesMoved(TouchEvent event)
+void Title::touchesMoved(ci::app::TouchEvent event)
 {
 }
 
-void Title::touchesEnded(TouchEvent event)
+void Title::touchesEnded(ci::app::TouchEvent event)
 {
 }
 

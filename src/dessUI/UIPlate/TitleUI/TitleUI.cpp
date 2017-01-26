@@ -37,9 +37,9 @@ void TitleUI::setup(const dess::SceneName & name)
 	ui_data[u8"”wŒi"]->Active();
 }
 
-void TitleUI::update()
+void TitleUI::update(const int& delta_frame)
 {
-	UIPlate::update();
+	UIPlate::update(delta_frame);
 }
 
 void TitleUI::draw()

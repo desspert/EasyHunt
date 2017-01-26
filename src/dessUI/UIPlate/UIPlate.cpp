@@ -115,9 +115,9 @@
 //	c_Easing::update();
 //}
 
-void setTexture(std::unordered_map<std::string, gl::TextureRef>& mTexture,const std::vector<std::string>& ui_objects,
-	std::unordered_map<std::string, std::shared_ptr<UIBase>>& ui_data, std::unordered_map<std::string, Font>& font,
-	std::unordered_map<std::string, gl::TextureRef>& gauge_texture) {
+void setTexture(std::unordered_map<std::string, ci::gl::TextureRef>& mTexture,const std::vector<std::string>& ui_objects,
+	std::unordered_map<std::string, std::shared_ptr<UIBase>>& ui_data, std::unordered_map<std::string, ci::Font>& font,
+	std::unordered_map<std::string, ci::gl::TextureRef>& gauge_texture) {
 	
 	for (auto it = ui_objects.begin(); it != ui_objects.end(); it++) {
 
@@ -127,20 +127,20 @@ void setTexture(std::unordered_map<std::string, gl::TextureRef>& mTexture,const 
 			ui_data[(*it)]->getUIType() == UITYPE::AnimationUI) {
 			//テクスチャのパスをセット
 
-			auto img = loadImage(loadAsset(ui_data[(*it)]->getTexturePath()));
-			mTexture[(*it)] = gl::Texture::create(img);
+			auto img = ci::loadImage(ci::app::loadAsset(ui_data[(*it)]->getTexturePath()));
+			mTexture[(*it)] = ci::gl::Texture::create(img);
 			
 		}
 		else {
 			if (ui_data[(*it)]->getUIType() == UITYPE::FontUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::IncrementTimeUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::DecrementTimeUI) {
-				font[(*it)] = Font(ui_data[(*it)]->fontGetPath(), ui_data[(*it)]->fontGetSize());
+				font[(*it)] = ci::Font(ui_data[(*it)]->fontGetPath(), ui_data[(*it)]->fontGetSize());
 				continue;
 			}
 			if (ui_data[(*it)]->getUIType() == UITYPE::GaugeUI) {
-				auto img = loadImage(loadAsset(ui_data[(*it)]->getTexturePath()));
-				gauge_texture[(*it)] = gl::Texture::create(img);
+				auto img = ci::loadImage(ci::app::loadAsset(ui_data[(*it)]->getTexturePath()));
+				gauge_texture[(*it)] = ci::gl::Texture::create(img);
 				
 			}
 		}
@@ -156,7 +156,7 @@ void UIPlate::setup(const dess::SceneName& name)
 	setTexture(textures,ui_objects,ui_data,font,gauge_texture);
 }
 
-void UIPlate::update()
+void UIPlate::update(const int& delta_frame)
 {
 	for (auto it = ui_objects.begin(); it != ui_objects.end(); it++) {
 		ui_data[*it]->update();
@@ -244,17 +244,16 @@ void UIPlate::draw()
 			ui_data[(*it)]->getUIType() == UITYPE::AnimationUI) {
 
 			textures[(*it)]->bind();
-			// draw the texture itself in the upper right corner	
-			//gl::setMatricesWindow(getWindowSize());
 
-			Rectf drawRect(vec2(
+			ci::Rectf drawRect(ci::vec2(
 				ui_data[(*it)]->getPosX(),
 				ui_data[(*it)]->getPosY()),
 				ci::vec2(
 					ui_data[(*it)]->getPosX() + ui_data[(*it)]->getSizeX(),
 					ui_data[(*it)]->getPosY() + ui_data[(*it)]->getSizeY()));
 
-			gl::draw(textures[(*it)], drawRect);
+			ci::gl::draw(textures[(*it)], drawRect);
+
 			textures[(*it)]->unbind();
 		}
 		else {
@@ -266,16 +265,16 @@ void UIPlate::draw()
 			if (ui_data[(*it)]->getUIType() == UITYPE::GaugeUI) {
 				gauge_texture[(*it)]->bind();
 				// draw the texture itself in the upper right corner	
-				gl::setMatricesWindow(getWindowSize());
+				ci::gl::setMatricesWindow(ci::app::getWindowSize());
 
-				Rectf drawRect(vec2(
+				ci::Rectf drawRect(ci::vec2(
 					ui_data[(*it)]->getPosX(),
 					ui_data[(*it)]->getPosY()),
 					ci::vec2(
 						ui_data[(*it)]->getPosX() + ui_data[(*it)]->getSizeX(),
 						ui_data[(*it)]->getPosY() + ui_data[(*it)]->getSizeY()));
 
-				gl::draw(textures[(*it)], drawRect);
+				ci::gl::draw(textures[(*it)], drawRect);
 				gauge_texture[(*it)]->unbind();
 			}
 		}

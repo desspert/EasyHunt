@@ -1,23 +1,25 @@
 #include "GameMain.h"
 
-void GameMain::update()
+void GameMain::update(const int& delta_frame)
 {
-	ui.update();
-	player->update();
+	ui.update(delta_frame);
+	player->update(delta_frame);
+	enemy->update(delta_frame);
 }
 
 void GameMain::draw()
 {
-	ui.draw();
 	player->draw();
+	enemy->draw();
+	ui.draw();
+	
 }
 
 void GameMain::setup()
 {
 	ui.setup(dess::SceneName::GAMEMAIN);
-	ui.ui_data[u8"”wŒi"]->Active();
-	ui.ui_data[u8"‚í‚Á‚Ó‚§‚¢"]->Active();
-
+	player->setup();
+	enemy->setup();
 }
 
 void GameMain::mouseDown(const ci::app::MouseEvent & event)

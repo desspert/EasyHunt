@@ -5,23 +5,20 @@
 #include <cinder/imageIo.h>
 #include <cinder/gl/Texture.h> 
 #include "../UIManager/UIManager.h"
-#include "../Texture.h"
 #include <cinder/Camera.h>
 
 class UIPlate : public UIManager
 {
 private:
-	std::unordered_map<std::string, Font> font;
-	gl::BatchRef		mSphere;
-	std::unordered_map<std::string,gl::TextureRef>		textures;
-	std::unordered_map<std::string, gl::TextureRef>		gauge_texture;
-	gl::GlslProgRef		mGlsl;
+	std::unordered_map<std::string, ci::Font> font;
+	std::unordered_map<std::string,ci::gl::TextureRef>		textures;
+	std::unordered_map<std::string, ci::gl::TextureRef>		gauge_texture;
 	
 public:
 	UIPlate() {
 		
 	};
 	virtual void setup(const dess::SceneName& name);
-	virtual void update();
+	virtual void update(const int& delta_frame);
 	virtual void draw();
 };

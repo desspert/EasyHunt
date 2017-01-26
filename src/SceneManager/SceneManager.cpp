@@ -9,9 +9,9 @@ void SceneManager::setup()
 }
 
 
-void SceneManager::update()
+void SceneManager::update(const int& delta_frame)
 {
-	scene->update();
+	scene->update(delta_frame);
 }
 
 void SceneManager::draw()

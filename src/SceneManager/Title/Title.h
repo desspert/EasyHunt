@@ -10,12 +10,12 @@ private:
 
 public:
 	Title(){}
-	void update() override;
+	void update(const int& delta_frame) override;
 	void draw() override;
 	void setup() override;
-	void touchesBegan(TouchEvent event);
-	void touchesMoved(TouchEvent event);
-	void touchesEnded(TouchEvent event);
+	void touchesBegan(ci::app::TouchEvent event);
+	void touchesMoved(ci::app::TouchEvent event);
+	void touchesEnded(ci::app::TouchEvent event);
 	void mouseDown(const ci::app::MouseEvent& event);
 	void mouseDrag(const ci::app::MouseEvent& event);
 	void mouseUp(const ci::app::MouseEvent& event);

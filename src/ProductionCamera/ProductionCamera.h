@@ -6,11 +6,11 @@ class ProductionCamera {
 	ci::CameraPersp camera;
 	std::shared_ptr<ci::vec2*> camera_pos;
 	float camera_z;
+	ci::vec2 camera_size;
 public:
 	
 	ProductionCamera(){
-		
-		
+		camera_size = ci::vec2(0);
 	}
 	~ProductionCamera() {
 		
@@ -23,13 +23,14 @@ public:
 	const ci::CameraPersp& getCamera() {
 		return camera;
 	}
-	void setPos(ci::vec2* pos) {
+	void followingCamera(ci::vec2* pos, const ci::vec2& size) {
 		camera_pos = std::make_shared<ci::vec2*>(pos);
+		camera_size = size;
 	}
-	void followingCamera(const ci::vec2& obj, const float& seconds);
+	
 
 	void shakeCamera(const float& scatter, const float& seconds);
 	void setup();
 
-	void update();
+	void update(const int& delta_frame);
 };

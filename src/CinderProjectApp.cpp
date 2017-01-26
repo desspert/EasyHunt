@@ -18,7 +18,7 @@ enum {
 class CinderProjectApp : public App {
 	
 	SceneManager scene;
-	
+	int delta_frame;
 	// 物体をマウスでグリグリする機能
 	Arcball arcball;
 	AxisAlignedBox aabb;
@@ -53,7 +53,7 @@ void CinderProjectApp::resize()
 }
 
 void CinderProjectApp::setup() {
-	
+	delta_frame = 0;
 	//camera = CameraPersp(WINDOW_WIDTH, WINDOW_HEIGHT,
 	//	60.0f,
 	//	1.0f, 500.0f);
@@ -63,6 +63,7 @@ void CinderProjectApp::setup() {
 	
 	gl::enableDepthWrite();
 	gl::enableDepthRead();
+	gl::enableAlphaBlending();
 	//camera.lookAt(vec3(0.0f, 0.0f, 0.0f),vec3(0.0f, 0.0f, -1000.0f));
 
 	//aabb = AxisAlignedBox(vec3(-0.5f, -0.5f, -5.0f), vec3(0.5f, 0.5f, -5.0f));
@@ -146,8 +147,13 @@ void CinderProjectApp::update()
 {
 	//デルタタイム
 	//timeline().getCurrentTime()
-	scene.update();
-	CAMERA.update();
+	
+	delta_frame =  std::abs(delta_frame - static_cast<int>(ci::app::getElapsedFrames()));
+
+	scene.update(delta_frame);
+	CAMERA.update(delta_frame);
+	
+	delta_frame = static_cast<int>(ci::app::getElapsedFrames());
 }
 
 

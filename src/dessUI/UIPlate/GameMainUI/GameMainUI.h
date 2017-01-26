@@ -4,7 +4,10 @@
 class GameMainUI : public UIPlate
 {
 public:
-	/*bool init() override;
-	void update(float delta) override;
-	CREATE_FUNC(GameMainUI);*/
+	void setup(const dess::SceneName& name) override;
+	void update(const int& delta_frame) override;
+	void draw() override;
+	void mouseDown(ci::app::MouseEvent event);
+	void mouseDrag(ci::app::MouseEvent event);
+	void mouseUp(ci::app::MouseEvent event);
 };

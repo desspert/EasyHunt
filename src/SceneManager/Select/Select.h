@@ -5,7 +5,7 @@ class Select : public SceneBase
 {
 public:
 	Select() {}
-	void update() override {};
+	void update(const int& delta_frame) override {};
 	void draw() override {};
 	void setup() override {};
 	void mouseDown(const ci::app::MouseEvent& event) {}
