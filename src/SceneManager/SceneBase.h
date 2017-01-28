@@ -13,7 +13,7 @@ class SceneBase {
 public:
 	SceneBase() {}
 	~SceneBase(){};
-	virtual void update(const int& delta_frame) {};
+	virtual void update(const float& delta_time) {};
 	virtual void draw() {};
 	virtual void setup() {};
 	virtual void mouseDown(const ci::app::MouseEvent& event) {};

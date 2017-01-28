@@ -52,10 +52,7 @@ protected:
 
 
 	std::ifstream fs;
-
-	template<typename ty>
-	ty* UIBase::selectUIState(int state);
-	
+    
 	int start;
 	bool end;
 	bool is_active;
@@ -111,9 +108,9 @@ public:
 	std::string getTexturePath() {
 		return texture_path;
 	}
-	const bool& getActive() {
-		return is_active;
-	}
+    const bool& getActive() {
+        return is_active;
+    }
 	const bool& NextFlag() {
 		return !is_active;
 	}
@@ -132,7 +129,7 @@ public:
 		size.x = size_x;
 		size.y = size_y;
 	}
-	void setColor(const float& color_r, const float& color_g, const float& color_b, const float& color_a) {
+	void setColor(const double& color_r, const double& color_g, const double& color_b, const double& color_a) {
 		color.x = color_r;
 		color.y = color_g;
 		color.z = color_b;
@@ -142,17 +139,19 @@ public:
 	void setTexturePath(std::string path) {
 		texture_path = path;
 	}
-	
-	void setActive(const bool& active) {
-		if ( is_active &&
-			active == false) {
+	void setEnd() {
+		if (is_active) {
 			end = true;
 		}
-		is_active = active;
 	}
-	void Active() {
-		is_active = true;
-	}
+    void setActive(const bool& active) {
+        if ( is_active &&
+            active == false) {
+            end = true;
+        }
+        is_active = active;
+    }
+    
 	//---------------------------------------------------------
 
 
@@ -238,8 +237,8 @@ public:
 	virtual void animationSetBetween(const float& between) {}
 };
 
-template<typename ty>
-ty* UIBase::selectUIState(int state)
+
+float* UIBase::selectUIState(int state)
 {
 	switch (state)
 	{
@@ -260,5 +259,5 @@ ty* UIBase::selectUIState(int state)
 	case 7:
 		return &color.w;
 	}
-	return reinterpret_cast<float*>(&pos.x);
+	return &pos.x;
 }

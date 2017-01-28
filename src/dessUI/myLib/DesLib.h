@@ -115,42 +115,13 @@ public:
 
 
 
-	void normalize()
-	{
-		DIST invS = 1 / length();
-		x *= invS;
-		y *= invS;
-	}
+	
 
-	Vec2<T> normalized() const
-	{
-		DIST invS = 1 / length();
-		return Vec2<T>(x * invS, y * invS);
-	}
+	
 
-	// tests for zero-length
-	void safeNormalize()
-	{
-		T s = lengthSquared();
-		if (s > 0) {
-			DIST invL = 1 / math<DIST>::sqrt(s);
-			x *= invL;
-			y *= invL;
-		}
-	}
+	
 
-	Vec2<T> safeNormalized() const
-	{
-		T s = lengthSquared();
-		if (s > 0) {
-			DIST invL = 1 / math<DIST>::sqrt(s);
-			return Vec2<T>(x * invL, y * invL);
-		}
-		else
-			return Vec2<T>::zero();
-	}
-
-
+	
 
 	T lengthSquared() const
 	{
@@ -159,18 +130,7 @@ public:
 
 
 
-	//! Returns a copy of the Vec2 with its length limited to \a maxLength, scaling it proportionally if necessary.
-	Vec2<T> limited(T maxLength) const
-	{
-		T lengthSquared = x * x + y * y;
-
-		if ((lengthSquared > maxLength * maxLength) && (lengthSquared > 0)) {
-			DIST ratio = maxLength / math<DIST>::sqrt(lengthSquared);
-			return Vec2<T>(x * ratio, y * ratio);
-		}
-		else
-			return *this;
-	}
+	
 
 	void invert()
 	{
@@ -232,7 +192,7 @@ public:
 	static Vec2<T> xAxis() { return Vec2<T>(1, 0); }
 	static Vec2<T> yAxis() { return Vec2<T>(0, 1); }
 
-	static Vec2<T> NaN() { return Vec2<T>(math<T>::NaN(), math<T>::NaN()); }
+	
 	
 };
 
@@ -265,10 +225,7 @@ public:
 		: x(static_cast<T>(src.x)), y(static_cast<T>(src.y)), z(static_cast<T>(src.z))
 	{}
 	template<typename Y>
-	explicit Vec3(const Y &v)
-		: x(VEC3CONV<Vec3<typename T::TYPE>, Y>::getX(v)), y(VEC3CONV<typename T::TYPE, Y>::getY(v)), z(VEC3CONV<typename T::TYPE, Y>::getZ(v))
-	{
-	}
+	
 
 	void set(T ax, T ay, T az)
 	{
@@ -357,41 +314,16 @@ public:
 		return (*this - rhs).lengthSquared();
 	}
 
-	T length() const
-	{
-		return math<T>::sqrt(x*x + y*y + z*z);
-	}
+	
 
 	T lengthSquared() const
 	{
 		return x*x + y*y + z*z;
 	}
 
-	//! Limits the length of a Vec3 to \a maxLength, scaling it proportionally if necessary.
-	void limit(T maxLength)
-	{
-		T lengthSquared = x * x + y * y + z * z;
+	
 
-		if ((lengthSquared > maxLength * maxLength) && (lengthSquared > 0)) {
-			T ratio = maxLength / math<T>::sqrt(lengthSquared);
-			x *= ratio;
-			y *= ratio;
-			z *= ratio;
-		}
-	}
-
-	//! Returns a copy of the Vec3 with its length limited to \a maxLength, scaling it proportionally if necessary.
-	Vec3<T> limited(T maxLength) const
-	{
-		T lengthSquared = x * x + y * y + z * z;
-
-		if ((lengthSquared > maxLength * maxLength) && (lengthSquared > 0)) {
-			T ratio = maxLength / math<T>::sqrt(lengthSquared);
-			return Vec3<T>(x * ratio, y * ratio, z * ratio);
-		}
-		else
-			return *this;
-	}
+	
 
 	void invert()
 	{
@@ -403,103 +335,11 @@ public:
 		return Vec3<T>(-x, -y, -z);
 	}
 
-	void normalize()
-	{
-		T invS = ((T)1) / length();
-		x *= invS;
-		y *= invS;
-		z *= invS;
-	}
+	
 
-	Vec3<T> normalized() const
-	{
-		T invS = ((T)1) / length();
-		return Vec3<T>(x * invS, y * invS, z * invS);
-	}
+	
 
-	// tests for zero-length
-	void safeNormalize()
-	{
-		T s = lengthSquared();
-		if (s > 0) {
-			T invS = ((T)1) / math<T>::sqrt(s);
-			x *= invS;
-			y *= invS;
-			z *= invS;
-		}
-	}
-
-	Vec3<T> safeNormalized() const
-	{
-		T s = lengthSquared();
-		if (s > 0) {
-			float invS = ((T)1) / math<T>::sqrt(s);
-			return Vec3<T>(x * invS, y * invS, z * invS);
-		}
-		else
-			return *this;
-	}
-
-	//! Returns a vector which is orthogonal to \a this
-	Vec3<T> getOrthogonal() const
-	{
-		if (math<T>::abs(y) < (T)0.99) // abs(dot(u, Y)), somewhat arbitrary epsilon
-			return Vec3<T>(-z, 0, x); // cross( this, Y )
-		else
-			return Vec3<T>(0, z, -y); // cross( this, X )
-	}
-
-	void rotateX(T angle)
-	{
-		T sina = math<T>::sin(angle);
-		T cosa = math<T>::cos(angle);
-		T ry = y * cosa - z * sina;
-		T rz = y * sina + z * cosa;
-		y = ry;
-		z = rz;
-	}
-
-	void rotateY(T angle)
-	{
-		T sina = math<T>::sin(angle);
-		T cosa = math<T>::cos(angle);
-		T rx = x * cosa - z * sina;
-		T rz = x * sina + z * cosa;
-		x = rx;
-		z = rz;
-	}
-
-	void rotateZ(T angle)
-	{
-		T sina = math<T>::sin(angle);
-		T cosa = math<T>::cos(angle);
-		T rx = x * cosa - y * sina;
-		T ry = x * sina + y * cosa;
-		x = rx;
-		y = ry;
-	}
-
-	void rotate(Vec3<T> axis, T angle)
-	{
-		T cosa = math<T>::cos(angle);
-		T sina = math<T>::sin(angle);
-
-		T rx = (cosa + (1 - cosa) * axis.x * axis.x) * x;
-		rx += ((1 - cosa) * axis.x * axis.y - axis.z * sina) * y;
-		rx += ((1 - cosa) * axis.x * axis.z + axis.y * sina) * z;
-
-		T ry = ((1 - cosa) * axis.x * axis.y + axis.z * sina) * x;
-		ry += (cosa + (1 - cosa) * axis.y * axis.y) * y;
-		ry += ((1 - cosa) * axis.y * axis.z - axis.x * sina) * z;
-
-		T rz = ((1 - cosa) * axis.x * axis.z - axis.y * sina) * x;
-		rz += ((1 - cosa) * axis.y * axis.z + axis.x * sina) * y;
-		rz += (cosa + (1 - cosa) * axis.z * axis.z) * z;
-
-		x = rx;
-		y = ry;
-		z = rz;
-	}
+	
 
 	Vec3<T> lerp(T fact, const Vec3<T> &rhs) const
 	{
@@ -526,28 +366,7 @@ public:
 		return Vec3<T>(static_cast<T>(1), static_cast<T>(1), static_cast<T>(1));
 	}
 
-	Vec3<T> slerp(T fact, const Vec3<T> &r) const
-	{
-		T cosAlpha, alpha, sinAlpha;
-		T t1, t2;
-		Vec3<T> result;
-
-		// get cosine of angle between vectors (-1 -> 1)
-		cosAlpha = this->dot(r);
-
-		// get angle (0 -> pi)
-		alpha = math<T>::acos(cosAlpha);
-
-		// get sine of angle between vectors (0 -> 1)
-		sinAlpha = math<T>::sin(alpha);
-
-		// this breaks down when sinAlpha = 0, i.e. alpha = 0 or pi
-		t1 = math<T>::sin(((T)1 - fact) * alpha) / sinAlpha;
-		t2 = math<T>::sin(fact * alpha) / sinAlpha;
-
-		// interpolate src vectors
-		return *this * t1 + r * t2;
-	}
+	
 
 	// derived from but not equivalent to Quaternion::squad
 	Vec3<T> squad(T t, const Vec3<T> &tangentA, const Vec3<T> &tangentB, const Vec3<T> &end) const
@@ -606,7 +425,7 @@ public:
 	static Vec3<T> yAxis() { return Vec3<T>(0, 1, 0); }
 	static Vec3<T> zAxis() { return Vec3<T>(0, 0, 1); }
 
-	static Vec3<T> NaN() { return Vec3<T>(math<T>::NaN(), math<T>::NaN(), math<T>::NaN()); }
+	
 };
 
 template <class T>
@@ -720,11 +539,7 @@ public:
 		return (*this - rhs).lengthSquared();
 	}
 
-	T length() const
-	{
-		// For most vector operations, this assumes w to be zero.
-		return math<T>::sqrt(x*x + y*y + z*z + w*w);
-	}
+	
 
 	T lengthSquared() const
 	{
@@ -732,71 +547,14 @@ public:
 		return x*x + y*y + z*z + w*w;
 	}
 
-	void normalize()
-	{
-		T invS = ((T)1) / length();
-		x *= invS;
-		y *= invS;
-		z *= invS;
-		w *= invS;
-	}
-
-	Vec4<T> normalized() const
-	{
-		T invS = ((T)1) / length();
-		return Vec4<T>(x*invS, y*invS, z*invS, w*invS);
-	}
-
-	// Tests for zero-length
-	void safeNormalize()
-	{
-		T s = lengthSquared();
-		if (s > 0) {
-			T invS = ((T)1) / math<T>::sqrt(s);
-			x *= invS;
-			y *= invS;
-			z *= invS;
-			w = (T)0;
-		}
-	}
-
-	//! Limits the length of a Vec4 to \a maxLength, scaling it proportionally if necessary.
-	void limit(T maxLength)
-	{
-		T lenSq = lengthSquared();
-
-		if ((lenSq > maxLength * maxLength) && (lenSq > 0)) {
-			T ratio = maxLength / math<T>::sqrt(lenSq);
-			x *= ratio;
-			y *= ratio;
-			z *= ratio;
-			w *= ratio;
-		}
-
-		/*
-		T lengthSquared = x * x + y * y + z * z + w * w;
-
-		if( ( lengthSquared > maxLength * maxLength ) && ( lengthSquared > 0 ) ) {
-		T ratio = maxLength / math<T>::sqrt( lengthSquared );
-		x *= ratio;
-		y *= ratio;
-		z *= ratio;
-		w *= ratio;
-		}
-		*/
-	}
+	
 
 	//! Returns a copy of the Vec4 with its length limited to \a maxLength, scaling it proportionally if necessary.
 	Vec4<T> limited(T maxLength) const
 	{
 		T lenSq = lengthSquared();
 
-		if ((lenSq > maxLength * maxLength) && (lenSq > 0)) {
-			T ratio = maxLength / math<T>::sqrt(lenSq);
-			return Vec4<T>(x * ratio, y * ratio, z * ratio, w * ratio);
-		}
-		else
-			return *this;
+		
 
 		/*
 		T lengthSquared = x * x + y * y + z * z + w * w;
@@ -845,28 +603,7 @@ public:
 		return Vec4<T>(static_cast<T>(1), static_cast<T>(1), static_cast<T>(1), static_cast<T>(1));
 	}
 
-	Vec4<T> slerp(T fact, const Vec3<T> &r) const
-	{
-		T cosAlpha, alpha, sinAlpha;
-		T t1, t2;
-		Vec4<T> result;
-
-		// get cosine of angle between vectors (-1 -> 1)
-		cosAlpha = this->dot(r);
-
-		// get angle (0 -> pi)
-		alpha = math<T>::acos(cosAlpha);
-
-		// get sine of angle between vectors (0 -> 1)
-		sinAlpha = math<T>::sin(alpha);
-
-		// this breaks down when sinAlpha = 0, i.e. alpha = 0 or pi
-		t1 = math<T>::sin(((T)1 - fact) * alpha) / sinAlpha;
-		t2 = math<T>::sin(fact * alpha) / sinAlpha;
-
-		// interpolate src vectors
-		return *this * t1 + r * t2;
-	}
+	
 
 	// derived from but not equivalent to Quaternion::squad
 	Vec4<T> squad(T t, const Vec4<T> &tangentA, const Vec4<T> &tangentB, const Vec4<T> &end) const
@@ -1183,7 +920,7 @@ public:
 	static Vec4<T> zAxis() { return Vec4<T>(0, 0, 1, 0); }
 	static Vec4<T> wAxis() { return Vec4<T>(0, 0, 0, 1); }
 
-	static Vec4<T> NaN() { return Vec4<T>(math<T>::NaN(), math<T>::NaN(), math<T>::NaN(), math<T>::NaN()); }
+	
 };
 
 typedef Vec2<int>		Vec2i;

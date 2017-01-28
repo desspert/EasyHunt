@@ -6,24 +6,31 @@ void Enemy::setup()
 	texture = ci::gl::Texture::create(img);
 }
 
-void Enemy::update(const int& delta_frame)
+void Enemy::update(const float& delta_time)
 {
 }
 
 void Enemy::draw()
 {
-	ci::gl::drawSolidCircle(ci::vec2(pos.x + size.x / 2, pos.y + size.y / 2), radius, 30);
+	ci::gl::pushModelMatrix();
+	ci::gl::translate(pos);
+	ci::gl::rotate(0);
+	ci::gl::translate(ci::vec2(-size.x / 2, -size.y / 2));
+	ci::gl::drawSolidCircle(ci::vec2(size.x / 2, size.y / 2), radius, 30);
 	texture->bind();
-
 	ci::Rectf drawRect(ci::vec2(
-		pos.x,
-		pos.y),
+		0,
+		0),
 		ci::vec2(
-			pos.x + size.x,
-			pos.y + size.y));
+			size.x,
+			size.y));
+
+
+
 
 	ci::gl::draw(texture, drawRect);
 
 	texture->unbind();
+	ci::gl::popModelMatrix();
 	
 }

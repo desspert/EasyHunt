@@ -1,18 +1,27 @@
 #pragma once
 #include <iostream>
-#include<cinder/app/App.h>
 #include "../ObjectBase.h"
+#include <cinder/app/App.h>
+#include <cinder/imageIo.h>
+#include <cinder/gl/Texture.h> 
+#include <cinder/gl/gl.h>
 class AnimationBase {
-private:
+protected:
 	bool is_active;
 	ci::vec2 pos;
 	ci::vec2 size;
-	int attack;
-	int damage_frame;
+	ci::vec2 cut;
+	ci::vec2 seets;
+	int all_seets;
+	ci::gl::TextureRef	texture;
+	int animation_count;
 public:
-	AnimationBase() {
+	AnimationBase(ci::gl::TextureRef copy_tex) : texture(copy_tex) {
 
 	}
-	virtual void animation(int delta_frame);
+	AnimationBase(ci::gl::TextureRef copy_tex, const ci::vec2& pos) : texture(copy_tex), pos(pos) {
 
+	}
+	virtual void update() = 0;
+	virtual void draw() = 0;
 };

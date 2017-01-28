@@ -11,14 +11,17 @@ private:
 	std::shared_ptr<Player> player;
 	std::shared_ptr<Enemy> enemy;
 	std::list<std::shared_ptr<ObjectBase>> objects;
+	
 public:
 	GameMain(){
-		player = std::make_shared<Player>(ci::vec2(0, 0), ci::vec2(100, 100),Status(10,10,10,""),Weapon(10,10,""));
+		player = std::make_shared<Player>(ci::vec2(0, 0), ci::vec2(100, 100),Status(10,10,300,""),Weapon(10,0.3f,""));
 		enemy = std::make_shared<Enemy>(ci::vec2(300, 0), ci::vec2(100, 100),10,10);
-		CAMERA.followingCamera(&player->getPos(), player->getSize());
+		
+		objects.push_back(enemy);
+		CAMERA.followingCamera(&player->getPPos(), player->getSize());
 	}
 	
-	void update(const int& delta_frame) override;
+	void update(const float& delta_time) override;
 	void draw() override;
 	void setup() override ;
 	void mouseDown(const ci::app::MouseEvent& event);

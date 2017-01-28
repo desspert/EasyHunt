@@ -9,9 +9,9 @@ void SceneManager::setup()
 }
 
 
-void SceneManager::update(const int& delta_frame)
+void SceneManager::update(const float& delta_time)
 {
-	scene->update(delta_frame);
+	scene->update(delta_time);
 }
 
 void SceneManager::draw()

@@ -5,7 +5,7 @@ class Result : public SceneBase
 {
 public:
 	Result() {}
-	void update(const int& delta_frame) override {};
+	void update(const float& delta_time) override {};
 	void draw() override {};
 	void setup() override {};
 	void mouseDown(const ci::app::MouseEvent& event) {}

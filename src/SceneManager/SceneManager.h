@@ -16,7 +16,7 @@ public:
 	
 	std::shared_ptr<SceneBase> scene;
 	void setup();
-	void update(const int& delta_frame);
+	void update(const float& delta_time);
 	void draw();
 	void shift(const SceneName& scene);
 	void touchesBegan(ci::app::TouchEvent event);

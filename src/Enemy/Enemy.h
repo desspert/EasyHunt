@@ -16,6 +16,6 @@ public:
 	}
 	virtual void damage(const int damage) {}
 	virtual void setup();
-	virtual void update(const int& delta_frame);
+	virtual void update(const float& delta_time);
 	virtual void draw();
 };

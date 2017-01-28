@@ -12,6 +12,6 @@ void ProductionCamera::setup(){
 	camera.lookAt(ci::vec3((*camera_pos)->x + camera_size.x / 2, (*camera_pos)->y + camera_size.x / 2, camera_z), ci::vec3(0), ci::vec3(0, -1, 0));
 }
 
-void ProductionCamera::update(const int& delta_frame) {
+void ProductionCamera::update(const float& delta_time) {
 	camera.lookAt(ci::vec3((*camera_pos)->x + camera_size.x / 2, (*camera_pos)->y + camera_size.x / 2, camera_z), ci::vec3((*camera_pos)->x + camera_size.x / 2, (*camera_pos)->y + camera_size.x / 2, 0));
 }

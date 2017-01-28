@@ -1,18 +1,21 @@
 #include "GameMain.h"
 
-void GameMain::update(const int& delta_frame)
+void GameMain::update(const float& delta_time)
 {
-	ui.update(delta_frame);
-	player->update(delta_frame);
-	enemy->update(delta_frame);
+	ui.update(delta_time);
+	player->update(delta_time);
+	enemy->update(delta_time);
+	ANIMATION.updae();
+	player->attack(objects);
 }
 
 void GameMain::draw()
 {
-	player->draw();
+	//ui.draw();
 	enemy->draw();
-	ui.draw();
+	player->draw(enemy);
 	
+	ANIMATION.draw();
 }
 
 void GameMain::setup()
@@ -20,6 +23,7 @@ void GameMain::setup()
 	ui.setup(dess::SceneName::GAMEMAIN);
 	player->setup();
 	enemy->setup();
+	ANIMATION.setup();
 }
 
 void GameMain::mouseDown(const ci::app::MouseEvent & event)

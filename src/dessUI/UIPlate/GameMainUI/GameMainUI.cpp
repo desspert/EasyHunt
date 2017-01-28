@@ -36,12 +36,12 @@
 void GameMainUI::setup(const dess::SceneName & name)
 {
 	UIPlate::setup(name);
-	ui_data[u8"”wŒi"]->Active();
+//	ui_data[u8"”wŒi"]->Active();
 }
 
-void GameMainUI::update(const int& delta_frame)
+void GameMainUI::update(const float& delta_time)
 {
-	UIPlate::update(delta_frame);
+	UIPlate::update(delta_time);
 }
 
 void GameMainUI::draw()

@@ -156,7 +156,7 @@ void UIPlate::setup(const dess::SceneName& name)
 	setTexture(textures,ui_objects,ui_data,font,gauge_texture);
 }
 
-void UIPlate::update(const int& delta_frame)
+void UIPlate::update(const float& delta_time)
 {
 	for (auto it = ui_objects.begin(); it != ui_objects.end(); it++) {
 		ui_data[*it]->update();

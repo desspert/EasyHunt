@@ -10,7 +10,7 @@ private:
 
 public:
 	Title(){}
-	void update(const int& delta_frame) override;
+	void update(const float& delta_time) override;
 	void draw() override;
 	void setup() override;
 	void touchesBegan(ci::app::TouchEvent event);

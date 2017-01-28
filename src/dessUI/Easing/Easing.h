@@ -117,19 +117,8 @@ public:
 	static bool isEnd(float& _terget) {
 		return easinginfo.find(&_terget) == easinginfo.end();
 	}
-
 	//draw‚ÌÅŒã‚ÉŒÄ‚ÔŠÖ”
-	static void update() {
-		for (auto& it : easinginfo) { it.second.countIncrement(); };
-		for (auto& i = easinginfo.begin(); i != easinginfo.end();)
-		{
-			if (i->second.info.size() == 0) {
-				i = easinginfo.erase(i);
-				continue;
-			}
-			i++;
-		}
-	}
+    static void update();
 
 private:
 	static std::unordered_map <float*, c_AnimInfo>  easinginfo;
@@ -295,7 +284,19 @@ namespace EasingFunction {
 		return -(e - b) / 2.f * (std::cos(float(M_PI) * t) - 1.f) + b;
 	}
 };
-
+void c_Easing::update(){
+    for (auto& it : easinginfo) { it.second.countIncrement(); };
+    
+    
+//    for (auto& i = easinginfo.begin(); i != easinginfo.end();)
+//    {
+//        			if (i->second.info.size() == 0) {
+//        				i = easinginfo.erase(i);
+//        				continue;
+//        			}
+//        			i++;
+//    }
+}
 ///ÀÛ‚Ìg‚¢•û
 /*
 

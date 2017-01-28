@@ -1,9 +1,9 @@
 #include "Title.h"
 
-void Title::update(const int& delta_frame)
+void Title::update(const float& delta_time)
 {
 	
-	ui.update(delta_frame);
+	ui.update(delta_time);
 	
 }
 

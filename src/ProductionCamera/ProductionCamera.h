@@ -32,5 +32,5 @@ public:
 	void shakeCamera(const float& scatter, const float& seconds);
 	void setup();
 
-	void update(const int& delta_frame);
+	void update(const float& delta_time);
 };
