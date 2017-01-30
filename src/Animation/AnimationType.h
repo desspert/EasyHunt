@@ -7,9 +7,9 @@ enum class AnimationType {
 
 class AnimationData {
 public:
-	//std::unordered_map<AnimationType, std::string> texture_data;
+	std::map<AnimationType, std::string> texture_data;
 	AnimationData() {
-		//texture_data[AnimationType::Blade] = "attack.png";
+		texture_data[AnimationType::Blade] = "attack.png";
 	}
 	
 };

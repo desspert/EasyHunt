@@ -5,10 +5,14 @@
 void Player::attack(std::list<std::shared_ptr<ObjectBase>>& objects)
 {
 	for (auto& it : objects) {
-		if (CollisionCircleToCircle(pos, radius, it->getPPos(), it->getRradius())) {
+		if (CollisionCircleToCircle(pos, radius*3, it->getPPos(), it->getRradius())) {
 			if (is_attack) {
-				ci::app::console() << returnCircleToCircle(pos, it->getPPos(), it->getRradius()) << std::endl;
-//			ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos(), it->getRradius()), it, ANIMATION.getTexture()[AnimationType::Blade]);
+				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos(), it->getRradius()),
+				it,
+				1325,
+				ANIMATION.getTexture()[AnimationType::Blade],
+				ANIMATION.getAttackTexture(),
+				ANIMATION.getFont());
 			}
 		}
 	}
@@ -28,7 +32,6 @@ void Player::move(const float& delta_time)
 {
 
 	if (pos_moved != ci::vec2(0)) {
-		rotate += 0.1f;
 		auto buf = ci::vec2((pos_begin.x - pos_moved.x) / 100, (pos_begin.y - pos_moved.y) / 100);
 		if (buf.x >= 2) buf.x = 2;
 		if (buf.x <= -2) buf.x = -2;
@@ -59,8 +62,11 @@ void Player::mouseUp(const ci::app::MouseEvent& event)
 
 void Player::setup()
 {
-	auto img = ci::loadImage(ci::app::loadAsset("clock.png"));
+	auto img = ci::loadImage(ci::app::loadAsset("tokugawa.png"));
 	texture = ci::gl::Texture2d::create(img);
+
+	auto img_range = ci::loadImage(ci::app::loadAsset("Player/Ball.png"));
+	attack_range = ci::gl::Texture2d::create(img_range);
 }
 
 void Player::update(const float& delta_time)
@@ -71,26 +77,46 @@ void Player::update(const float& delta_time)
 
 void Player::draw(std::shared_ptr<Enemy>& enemy)
 {
+	ci::gl::pushModelMatrix();
+	ci::gl::translate(pos);
+	ci::gl::rotate(rotate);
+	ci::gl::translate(ci::vec2(-size.x * 4.3f / 2, -size.y * 3 / 2));
+	attack_range->bind();
+	ci::gl::color(1, 0, 0, 0.2f);
+	ci::Rectf drawRange(ci::vec2(
+		0,
+		0),
+		ci::vec2(
+			size.x * 4.3f,
+			size.y * 3));
+	ci::gl::draw(attack_range, drawRange);
+	ci::gl::color(1, 1, 1, 1);
+	attack_range->unbind();
+	ci::gl::popModelMatrix();
+
+
 
 	ci::gl::pushModelMatrix();
 	ci::gl::translate(pos);
 	ci::gl::rotate(rotate);
 	ci::gl::translate(ci::vec2(-size.x / 2, -size.y / 2));
 	texture->bind();
+	ci::gl::color(color.r, color.g, color.b, color.a);
 	ci::Rectf drawRect(ci::vec2(
 		0,
 		0),
 		ci::vec2(
 			size.x,
 			size.y));
-
-
-
-
 	ci::gl::draw(texture, drawRect);
-
+	ci::gl::color(1, 1, 1, 1);
 	texture->unbind();
 	ci::gl::popModelMatrix();
+
+
+
+
+	
 
 
 }

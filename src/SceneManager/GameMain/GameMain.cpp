@@ -5,21 +5,23 @@ void GameMain::update(const float& delta_time)
 	ui.update(delta_time);
 	player->update(delta_time);
 	enemy->update(delta_time);
-	ANIMATION.updae();
+	ANIMATION.update();
 	player->attack(objects);
 }
 
 void GameMain::draw()
 {
-	//ui.draw();
-	enemy->draw();
+	ui.draw();
 	player->draw(enemy);
-	
+	enemy->draw();
 	ANIMATION.draw();
 }
 
 void GameMain::setup()
 {
+	SE.registerFilePlayerNode("bgm", "Music/Decisive_Battle.mp3");
+	SE.find("bgm")->setGain(0.3f);
+	SE.find("bgm")->start();
 	ui.setup(dess::SceneName::GAMEMAIN);
 	player->setup();
 	enemy->setup();

@@ -25,6 +25,7 @@ private:
 	ci::vec2 pos_moved;
 	ci::vec2 pos_end;
 	ci::gl::TextureRef	texture;
+	ci::gl::TextureRef attack_range;
 	Status status;
 	Weapon weapon;
 	bool is_attack;

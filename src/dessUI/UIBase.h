@@ -75,7 +75,6 @@ public:
 	void EaseInUpdate();
 	void EaseOutUpdate();
 
-	float* selectUIState(int state);
 
 
 	///////////////////////ÉQÉbÉ^Å[///////////////////////////////
@@ -238,26 +237,4 @@ public:
 };
 
 
-float* UIBase::selectUIState(int state)
-{
-	switch (state)
-	{
-	case 0:
-		return &pos.x;
-	case 1:
-		return &pos.y;
-	case 2:
-		return &size.x;
-	case 3:
-		return &size.y;
-	case 4:
-		return &color.x;
-	case 5:
-		return &color.y;
-	case 6:
-		return &color.z;
-	case 7:
-		return &color.w;
-	}
-	return &pos.x;
-}
+

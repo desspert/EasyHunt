@@ -7,6 +7,8 @@
 #include "cinder/Timeline.h"
 #include "cinder/Json.h"
 #include "SceneManager/SceneManager.h"
+#include "SoundManager.h"
+
 
 using namespace ci;
 using namespace ci::app;
@@ -53,6 +55,7 @@ void CinderProjectApp::resize()
 }
 
 void CinderProjectApp::setup() {
+	SE.setup();
 	delta_time = 0;
 	//camera = CameraPersp(WINDOW_WIDTH, WINDOW_HEIGHT,
 	//	60.0f,
