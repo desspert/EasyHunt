@@ -21,6 +21,7 @@ class CinderProjectApp : public App {
 	
 	SceneManager scene;
 	float delta_time;
+    vec3 cube_pos;
 	// 物体をマウスでグリグリする機能
 	Arcball arcball;
 	AxisAlignedBox aabb;
@@ -44,7 +45,7 @@ void prepareSettings(CinderProjectApp::Settings* settings)
 {
 	settings->setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	
-	settings->setMultiTouchEnabled(false);
+	//settings->setMultiTouchEnabled(false);
 }
 
 
@@ -64,7 +65,7 @@ void CinderProjectApp::setup() {
 	scene.setup();
 	CAMERA.setup();
 	
-	
+    cube_pos = vec3(0,0,0);
 	gl::enableAlphaBlending();
 	//camera.lookAt(vec3(0.0f, 0.0f, 0.0f),vec3(0.0f, 0.0f, -1000.0f));
 
@@ -92,17 +93,17 @@ void CinderProjectApp::setup() {
 
 void CinderProjectApp::touchesBegan(TouchEvent event)
 {
-	ci::app::console() << "b" << std::endl;
+	scene.touchesBegan(event);
 }
 
 void CinderProjectApp::touchesMoved(TouchEvent event)
 {
-	ci::app::console() << "m" << std::endl;
+	scene.touchesMoved(event);
 }
 
 void CinderProjectApp::touchesEnded(TouchEvent event)
 {
-	ci::app::console() << "e" << std::endl;
+	scene.touchesEnded(event);
 }
 
 
@@ -163,7 +164,7 @@ void CinderProjectApp::draw() {
 	scene.draw();
 	
 	
-	
+    //gl::drawColorCube(cube_pos, ci::vec3(100,100,100));
 
 	/*gl::clear(Color(0, 0, 0));
 	ui.update();

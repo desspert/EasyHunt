@@ -5,14 +5,13 @@
 void Player::attack(std::list<std::shared_ptr<ObjectBase>>& objects)
 {
 	for (auto& it : objects) {
-		if (CollisionCircleToCircle(pos, radius*3, it->getPPos(), it->getRradius())) {
+		if (CollisionCircleToCircle(pos, radius*weapon.range/100, it->getPPos(), it->getRradius())) {
 			if (is_attack) {
 				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos(), it->getRradius()),
 				it,
 				1325,
-				ANIMATION.getTexture()[AnimationType::Blade],
-				ANIMATION.getAttackTexture(),
 				ANIMATION.getFont());
+				break;
 			}
 		}
 	}
@@ -60,12 +59,27 @@ void Player::mouseUp(const ci::app::MouseEvent& event)
 
 }
 
+void Player::touchesBegan(ci::app::TouchEvent event)
+{
+	pos_begin = event.getTouches()[0].getPos();
+}
+
+void Player::touchesMoved(ci::app::TouchEvent event)
+{
+	pos_moved = event.getTouches()[0].getPos();
+}
+
+void Player::touchesEnded(ci::app::TouchEvent event)
+{
+	pos_end = event.getTouches()[0].getPos();
+	pos_moved = ci::vec2(0);
+
+}
+
 void Player::setup()
 {
-	auto img = ci::loadImage(ci::app::loadAsset("tokugawa.png"));
-	texture = ci::gl::Texture2d::create(img);
 
-	auto img_range = ci::loadImage(ci::app::loadAsset("Player/Ball.png"));
+	auto img_range = ci::loadImage(ci::app::loadAsset("Player/Circle.png"));
 	attack_range = ci::gl::Texture2d::create(img_range);
 }
 
@@ -75,20 +89,23 @@ void Player::update(const float& delta_time)
 	move(delta_time);
 }
 
-void Player::draw(std::shared_ptr<Enemy>& enemy)
+void Player::draw()
 {
+	
+
+
 	ci::gl::pushModelMatrix();
 	ci::gl::translate(pos);
 	ci::gl::rotate(rotate);
-	ci::gl::translate(ci::vec2(-size.x * 4.3f / 2, -size.y * 3 / 2));
+	ci::gl::translate(ci::vec2(-size.x * (weapon.range / 100)/2, -size.y * (weapon.range / 100) / 2));
 	attack_range->bind();
 	ci::gl::color(1, 0, 0, 0.2f);
 	ci::Rectf drawRange(ci::vec2(
 		0,
 		0),
 		ci::vec2(
-			size.x * 4.3f,
-			size.y * 3));
+			size.x * weapon.range / 100,
+			size.y * weapon.range / 100));
 	ci::gl::draw(attack_range, drawRange);
 	ci::gl::color(1, 1, 1, 1);
 	attack_range->unbind();

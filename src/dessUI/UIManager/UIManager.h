@@ -6,8 +6,8 @@
 #include "../UIs/IncrementTimeUI/IncrementTimeUI.h"
 #include "../UIs/DecrementTimeUI/DecrementTimeUI.h"
 #include "../UIs/AnimationUI/AnimationUI.h"
+#include "../Texture.h"
 #include <memory>
-#include "cinder/Json.h"
 #include "cinder/app/App.h"
 #include "jsoncpp/json.h"
 namespace dess {

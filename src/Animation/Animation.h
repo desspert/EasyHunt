@@ -14,13 +14,14 @@ private:
 	std::vector<ci::gl::TextureRef> attack_texture;
 	AnimationData data;
 	ci::Font font;
+	
 public:
 	Animation(){}
 	void setup();
 	template<class AnimationClass, class... Args>
 	void animationAdd(Args... args);
 	void draw();
-	void update();
+	void update(const float& delta_time);
 	void destroy();
 
 	ci::Font getFont() {

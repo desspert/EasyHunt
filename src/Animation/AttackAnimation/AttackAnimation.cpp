@@ -12,20 +12,23 @@ void AttackAnimation::damageUpdate()
 		c_Easing::apply(font_scale.y, 0.5f, EasingFunction::BounceIn, 10);
 		c_Easing::apply(font_color.a, 0.0f, EasingFunction::BounceIn, 40);
 	}
-	if (font_count == 40) {
-		is_active = false;
-	}
+
 
 }
 
-void AttackAnimation::update()
+void AttackAnimation::update(const float& delta_time)
 {
+	active_time -= delta_time;
+	if (active_time < 0) {
+		is_active = false;
+	}
 }
 
 void AttackAnimation::draw()
 {
 	if (!is_animaion) return;
 	ci::gl::pushModelMatrix();
+	
 	texture->bind();
 	ci::gl::translate(pos);
 	ci::gl::rotate(radius);
@@ -46,16 +49,10 @@ void AttackAnimation::draw()
 void AttackAnimation::drawDamage()
 {
 	if (!is_draw_damage) return;
-	ci::gl::pushModelMatrix();
-	ci::gl::translate(font_pos);
-	ci::gl::scale(font_scale);
-	ci::gl::translate(ci::vec2(-50, -50));
-	ci::gl::drawString(std::to_string(this->attack), ci::vec2(0, 0), font_color, font);
-	ci::gl::popModelMatrix();
 
 
 	ci::gl::pushModelMatrix();
-	attack_texture[attack_type]->bind();
+	TEX.get("Slashing")->bind();
 	ci::gl::translate(font_pos);
 	ci::gl::translate(ci::vec2(-size.x / 2, -size.y / 2));
 	ci::gl::color(attack_color.r, attack_color.g, attack_color.b, attack_color.a);
@@ -66,9 +63,19 @@ void AttackAnimation::drawDamage()
 			size.x,
 			size.y));
 
-	ci::gl::draw(attack_texture[attack_type], drawRect);
-	attack_texture[attack_type]->unbind();
+	ci::gl::draw(TEX.get("Slashing"), drawRect);
+	TEX.get("Slashing")->unbind();
 	ci::gl::color(1, 1, 1, 1);
 	ci::gl::popModelMatrix();
+
+	ci::gl::pushModelMatrix();
+	ci::gl::translate(font_pos);
+	ci::gl::scale(font_scale);
+	ci::gl::translate(ci::vec2(-50, -50));
+	ci::gl::drawString(std::to_string(this->attack), ci::vec2(0, 0), font_color, font);
+	ci::gl::popModelMatrix();
+
+
+	
 
 }

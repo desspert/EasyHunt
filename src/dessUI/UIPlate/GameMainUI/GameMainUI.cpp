@@ -36,7 +36,7 @@
 void GameMainUI::setup(const dess::SceneName & name)
 {
 	UIPlate::setup(name);
-	ui_data[u8"”wŒi"]->setActive(true);
+	//ui_data[u8"”wŒi"]->setActive(true);
 }
 
 void GameMainUI::update(const float& delta_time)

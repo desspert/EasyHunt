@@ -4,12 +4,16 @@
 #define CAMERA ProductionCamera::get()
 class ProductionCamera {
 	ci::CameraPersp camera;
-	std::shared_ptr<ci::vec2*> camera_pos;
+	ci::vec2 pos;
+	ci::vec2 buf_pos;
+	std::shared_ptr<ci::vec2*> reference_pos;
 	float camera_z;
 	ci::vec2 camera_size;
 public:
 	
 	ProductionCamera(){
+		pos = ci::vec2(0);
+		buf_pos = ci::vec2(0);
 		camera_size = ci::vec2(0);
 	}
 	~ProductionCamera() {
@@ -24,7 +28,7 @@ public:
 		return camera;
 	}
 	void followingCamera(ci::vec2* pos, const ci::vec2& size) {
-		camera_pos = std::make_shared<ci::vec2*>(pos);
+		reference_pos = std::make_shared<ci::vec2*>(pos);
 		camera_size = size;
 	}
 	

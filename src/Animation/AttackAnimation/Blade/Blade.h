@@ -1,17 +1,16 @@
 #pragma once
 #include "../../AnimationBase.h"
 #include "../AttackAnimation.h"
-#include "../../../SoundManager.h"
+
 class Blade : public AttackAnimation {
 public:
 
-	Blade(const std::shared_ptr<ObjectBase>& obj, ci::gl::TextureRef copy_tex,
-		std::vector<ci::gl::TextureRef>	attack_texture)
-		: AttackAnimation(obj,copy_tex, attack_texture) {
-
+	Blade(const std::shared_ptr<ObjectBase>& obj)
+		: AttackAnimation(obj) {
+		
+		texture = TEX.get("Blade");
 		pos = obj->getCenter();
 
-		attack_type = AttackType::Slashing;
 		size = ci::vec2(300, 300);
 		cut = ci::vec2(256, 256);
 		seets = ci::vec2(6, 0);
@@ -30,14 +29,13 @@ public:
 		std::uniform_real_distribution<float> random_rotate(-20.0f, 100.0f);
 		float rotate_buf = random_rotate(mt);
 		radius = rotate_buf;
-
+		active_time = 0.5f;
 	}
 	Blade(const ci::vec2& pos,const std::shared_ptr<ObjectBase>& obj,
 		const int& attack,
-		ci::gl::TextureRef copy_tex,
-		std::vector<ci::gl::TextureRef>	attack_texture,
-		ci::Font font) : AttackAnimation(pos,obj,attack, copy_tex, attack_texture,font){
-		attack_type = AttackType::Slashing;
+		ci::Font font) : AttackAnimation(pos,obj,attack,font){
+		
+		texture = TEX.get("Blade");
 		size = ci::vec2(300, 300);
 		cut = ci::vec2(256, 256);
 		seets = ci::vec2(6, 0);
@@ -56,11 +54,11 @@ public:
 		radius = rotate_buf;
 		font_pos = pos + ci::vec2(buf_x, buf_y);
 		SE.registerBufferPlayerNode("blade", "kiru2.wav");
-		
+		active_time = 0.5f;
 	}
 	void attackUpdate();
 
-	void update();
+	void update(const float& delta_time);
 	void draw();
 	
 };

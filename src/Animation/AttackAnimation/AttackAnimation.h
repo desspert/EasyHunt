@@ -3,9 +3,7 @@
 #include "../../dessUI/Easing/Easing.h"
 #include <random>
 
-enum  AttackType {
-	Slashing = 0
-};
+
 class AttackAnimation : public AnimationBase {
 protected:
 	//std::map<std::string, SignalType>& signals;
@@ -20,14 +18,11 @@ protected:
 	int font_count;
 	bool is_draw_damage;
 	bool is_animaion;
-	AttackType attack_type;
 public:
 
-	AttackAnimation(const std::shared_ptr<ObjectBase>& obj,
-		ci::gl::TextureRef copy_tex,
-		std::vector<ci::gl::TextureRef>	attack_texture)
-		: obj(obj), AnimationBase(copy_tex) ,attack_texture(attack_texture){
-
+	AttackAnimation(const std::shared_ptr<ObjectBase>& obj)
+		: obj(obj){
+		
 		pos = obj->getCenter();
 		
 		animation_count = 0;
@@ -35,8 +30,8 @@ public:
 		is_draw_damage = false;
 		is_animaion = true;
 		radius = 0;
-		font_scale = ci::vec2(1, 1);
-		font_color = ci::vec4(1, 0.5f,0.3f,1);
+		font_scale = ci::vec2(0.7f, 0.7f);
+		font_color = ci::vec4(0, 1,0,1);
 		attack_color = ci::vec4(1, 1, 1, 0.7f);
 		std::random_device rd;
 		std::mt19937 mt(rd());
@@ -49,18 +44,16 @@ public:
 	}
 	AttackAnimation(const ci::vec2& pos, 
 		const std::shared_ptr<ObjectBase>& obj,
-		const int& attack, ci::gl::TextureRef copy_tex,
-		std::vector<ci::gl::TextureRef>	attack_texture,
-		ci::Font font) :obj(obj), AnimationBase(copy_tex, pos),
-		attack_texture(attack_texture),
+		const int& attack,
+		ci::Font font) :obj(obj), AnimationBase(pos),
 		attack(attack), font(font) {
 		
 		animation_count = 0;
 		is_draw_damage = false;
 		is_animaion = true;
 		radius = 0;
-		font_scale = ci::vec2(1, 1);
-		font_color = ci::vec4(1, 0.5f, 0.3f, 1);
+		font_scale = ci::vec2(0.7f, 0.7f);
+		font_color = ci::vec4(0.3f, 1, 0.3f, 1);
 		attack_color = ci::vec4(1, 1, 1, 0.7f);
 		font_count = 0;
 		std::random_device rd;
@@ -74,7 +67,7 @@ public:
 		font_pos = pos + ci::vec2(buf_x, buf_y);
 	}
 	virtual void damageUpdate();
-	void update()override;
+	void update(const float& delta_time)override;
 	void draw()override;
 	virtual void drawDamage();
 	

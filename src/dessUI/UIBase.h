@@ -128,7 +128,7 @@ public:
 		size.x = size_x;
 		size.y = size_y;
 	}
-	void setColor(const double& color_r, const double& color_g, const double& color_b, const double& color_a) {
+	void setColor(const float& color_r, const float& color_g, const float& color_b, const float& color_a) {
 		color.x = color_r;
 		color.y = color_g;
 		color.z = color_b;

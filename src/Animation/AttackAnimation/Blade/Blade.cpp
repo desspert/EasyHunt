@@ -19,7 +19,7 @@ void Blade::attackUpdate()
 
 	texture->setCleanBounds(ci::Area(ci::Rectf(x, 0, x + cut.x, 0 + cut.y)));
 
-	if (animation_count == 15) {
+	if (animation_count == 12) {
 		is_animaion = false;
 
 	}
@@ -33,8 +33,9 @@ void Blade::attackUpdate()
 
 
 
-void Blade::update()
+void Blade::update(const float& delta_time)
 {
+	AttackAnimation::update(delta_time);
 	attackUpdate();
 	AttackAnimation::damageUpdate();
 }

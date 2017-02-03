@@ -151,21 +151,26 @@ public:
 		return sound.find(key_)->second;
 	}
 	void registerFilePlayerNode(std::string key_, std::string filepath_) {
-		ci::audio::SourceFileRef source = ci::audio::load(ci::app::loadAsset(filepath_));
+		
+		if (sound.find(key_) == sound.end()) {
+			ci::audio::SourceFileRef source = ci::audio::load(ci::app::loadAsset(filepath_));
 
-		ci::audio::FilePlayerNodeRef fileplayer = ctx->makeNode(new ci::audio::FilePlayerNode());
-		fileplayer->setSourceFile(source);
+			ci::audio::FilePlayerNodeRef fileplayer = ctx->makeNode(new ci::audio::FilePlayerNode());
+			fileplayer->setSourceFile(source);
 
-		sound.insert(std::make_pair(key_, std::make_shared<Sound>(Sound(fileplayer, ctx))));
+			sound.insert(std::make_pair(key_, std::make_shared<Sound>(Sound(fileplayer, ctx))));
+		}
 	}
 
 	void registerBufferPlayerNode(std::string key_, std::string filepath_) {
-		ci::audio::SourceFileRef source = ci::audio::load(ci::app::loadAsset(filepath_));
+		if (sound.find(key_) == sound.end()) {
+			ci::audio::SourceFileRef source = ci::audio::load(ci::app::loadAsset(filepath_));
 
-		ci::audio::BufferPlayerNodeRef bufferplayer = ctx->makeNode(new ci::audio::BufferPlayerNode());
-		bufferplayer->loadBuffer(source);
+			ci::audio::BufferPlayerNodeRef bufferplayer = ctx->makeNode(new ci::audio::BufferPlayerNode());
+			bufferplayer->loadBuffer(source);
 
-		sound.insert(std::make_pair(key_, std::make_shared<Sound>(Sound(bufferplayer, ctx))));
+			sound.insert(std::make_pair(key_, std::make_shared<Sound>(Sound(bufferplayer, ctx))));
+		}
 	}
 
 	void allStop() {
@@ -181,6 +186,7 @@ private:
 	// ˆê‹C‚É“Ç‚İ‚Ş‚â‚Â‚ªbufferplayer
 
 	std::unordered_map<std::string, std::shared_ptr<Sound>> sound;
+	std::unordered_map<std::string, std::string> keys;
 	ci::audio::Context* ctx;
 
 };

@@ -1,7 +1,5 @@
 ﻿#include "UIManager.h"
-std::string loadString(std::string const& relative_path) {
-	return std::string(static_cast<char*>(ci::app::loadAsset(relative_path)->getBuffer()->getData()));
-}
+
 
 std::shared_ptr<UIBase> selectUIType(const int& type) {
 	switch (type)

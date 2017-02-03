@@ -9,21 +9,19 @@ void Animation::draw()
 	}
 }
 
-void Animation::update()
+void Animation::update(const float& delta_time)
 {
 	for (auto& it : anim) {
-		it->update();
+		it->update(delta_time);
 	}
 	for (auto& it = anim.begin(); it != anim.end(); it++ ) {
 		if (!it->get()->isActive()) {
-			anim.erase(it);
+			it = anim.erase(it);
 			break;
 		}
 	}
 
-	while (anim.size() > 15) {
-		anim.erase(anim.begin());
-	}
+
 	
 	ci::app::console() << anim.size() << std::endl;
 }
@@ -36,7 +34,5 @@ void Animation::destroy()
 
 void Animation::setup()
 {
-	font = ci::Font("Hiragino Maru Gothic ProN W4", 100);
-	textures[AnimationType::Blade] = ci::gl::Texture2d::create(ci::loadImage(ci::app::loadAsset(data.texture_data[AnimationType::Blade])));
-	attack_texture.push_back(ci::gl::Texture2d::create(ci::loadImage(ci::app::loadAsset("Attack/attack.png"))));
+	font = ci::Font(ci::app::loadAsset("CP Font.ttf"), 100);
 }

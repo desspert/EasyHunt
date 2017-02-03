@@ -42,6 +42,21 @@ void SceneManager::shift(const SceneName& scene_name)
 	}
 }
 
+void SceneManager::touchesBegan(ci::app::TouchEvent event)
+{
+	scene->touchesBegan(event);
+}
+
+void SceneManager::touchesMoved(ci::app::TouchEvent event)
+{
+	scene->touchesMoved(event);
+}
+
+void SceneManager::touchesEnded(ci::app::TouchEvent event)
+{
+	scene->touchesEnded(event);
+}
+
 void SceneManager::mouseDown(const ci::app::MouseEvent& event)
 {
 	scene->mouseDown(event);

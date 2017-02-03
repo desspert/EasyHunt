@@ -19,4 +19,7 @@ public:
 	virtual void mouseDown(const ci::app::MouseEvent& event) {};
 	virtual void mouseDrag(const ci::app::MouseEvent& event) {};
 	virtual void mouseUp(const ci::app::MouseEvent& event) {};
+	virtual void touchesBegan(ci::app::TouchEvent event) {};
+	virtual void touchesMoved(ci::app::TouchEvent event) {};
+	virtual void touchesEnded(ci::app::TouchEvent event) {};
 };
