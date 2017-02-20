@@ -14,16 +14,12 @@ void Animation::update(const float& delta_time)
 	for (auto& it : anim) {
 		it->update(delta_time);
 	}
-	for (auto& it = anim.begin(); it != anim.end(); it++ ) {
+	for (auto it = anim.begin(); it != anim.end(); it++ ) {
 		if (!it->get()->isActive()) {
-			it = anim.erase(it);
+			anim.erase(it);
 			break;
 		}
 	}
-
-
-	
-	ci::app::console() << anim.size() << std::endl;
 }
 
 void Animation::destroy()
@@ -34,5 +30,6 @@ void Animation::destroy()
 
 void Animation::setup()
 {
-	font = ci::Font(ci::app::loadAsset("CP Font.ttf"), 100);
+	
+	
 }

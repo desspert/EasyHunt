@@ -13,6 +13,7 @@ class TextureManager
 {
 private:
 	std::unordered_map<std::string, ci::gl::TextureRef> texture;
+	ci::Font font;
 public:
 	TextureManager() {
 		
@@ -25,11 +26,15 @@ public:
 			texture[name] = ci::gl::Texture::create(img);
 		}
 	}
-
+	void setup() {
+		font = ci::Font(ci::app::loadAsset("CP Font.ttf"), 100);
+	}
 	ci::gl::TextureRef get(std::string name) {
 		return texture[name];
 	}
-
+	ci::Font getFont() {
+		return font;
+	}
 	static TextureManager& get() {
 		static TextureManager tex;
 		return tex;

@@ -2,16 +2,14 @@
 #include "../AnimationBase.h"
 #include "../../dessUI/Easing/Easing.h"
 #include <random>
-
-
+#include "cinder/app/RendererGl.h"
 class AttackAnimation : public AnimationBase {
 protected:
-	//std::map<std::string, SignalType>& signals;
 	std::shared_ptr<ObjectBase> obj;
 	std::vector<ci::gl::TextureRef>	attack_texture;
+	ci::TextLayout font;
 	int attack;
 	ci::vec4 attack_color;
-	ci::Font font;
 	ci::vec2 font_pos;
 	ci::vec2 font_scale;
 	ci::vec4 font_color;
@@ -22,7 +20,6 @@ public:
 
 	AttackAnimation(const std::shared_ptr<ObjectBase>& obj)
 		: obj(obj){
-		
 		pos = obj->getCenter();
 		
 		animation_count = 0;
@@ -44,9 +41,8 @@ public:
 	}
 	AttackAnimation(const ci::vec2& pos, 
 		const std::shared_ptr<ObjectBase>& obj,
-		const int& attack,
-		ci::Font font) :obj(obj), AnimationBase(pos),
-		attack(attack), font(font) {
+		const int& attack) :obj(obj), AnimationBase(pos),
+		attack(attack) {
 		
 		animation_count = 0;
 		is_draw_damage = false;
@@ -63,7 +59,10 @@ public:
 		
 		float buf_x = random_x(mt);
 		float buf_y = random_y(mt);
-		
+		font.setFont(TEX.getFont());
+		font.setColor(ci::ColorA(1, 1, 1,1));
+		font.addLine(std::to_string(attack));
+
 		font_pos = pos + ci::vec2(buf_x, buf_y);
 	}
 	virtual void damageUpdate();

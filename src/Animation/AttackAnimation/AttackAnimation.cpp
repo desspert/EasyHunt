@@ -13,7 +13,6 @@ void AttackAnimation::damageUpdate()
 		c_Easing::apply(font_color.a, 0.0f, EasingFunction::BounceIn, 40);
 	}
 
-
 }
 
 void AttackAnimation::update(const float& delta_time)
@@ -72,10 +71,14 @@ void AttackAnimation::drawDamage()
 	ci::gl::translate(font_pos);
 	ci::gl::scale(font_scale);
 	ci::gl::translate(ci::vec2(-50, -50));
-	ci::gl::drawString(std::to_string(this->attack), ci::vec2(0, 0), font_color, font);
+	
+	ci::gl::color(font_color.r, font_color.g, font_color.b, font_color.a);
+	ci::gl::draw(ci::gl::Texture2d::create(font.render(true)));
+	
+	ci::gl::color(ci::Color::white()); 
 	ci::gl::popModelMatrix();
 
-
+	
 	
 
 }

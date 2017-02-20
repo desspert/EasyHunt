@@ -26,8 +26,21 @@ std::shared_ptr<ObjectBase> returnEnemy(const int& type, const ci::vec2& pos,
 	return std::make_shared<NormalEnemy>(pos, size, hp, attack, range, attack_speed, path);
 }
 
+bool Map::isClear(const std::list<std::shared_ptr<ObjectBase>>& enemy)
+{
+	if (enemy.size() <= 0) {
+		return true;
+	}
+	return false;
+}
+
 void Map::setup(std::list<std::shared_ptr<ObjectBase>>& enemy)
 {
+	for (int i = 0; i < 2; i++) {
+		for (int k = 0; k < 2; k++) {
+			pos.push_back(ci::vec2(size.x * k, size.y * i));
+		}
+	}
 	Json::Value root_type;
 	Json::Reader reader;
 	if (reader.parse(loadString("MapData/MapData1.json"), root_type)) {
@@ -53,21 +66,21 @@ void Map::update(const float & delta_time)
 
 void Map::draw()
 {
-
-	ci::gl::pushModelMatrix();
-	ci::gl::translate(pos);
-	TEX.get("map")->bind();
-	ci::Rectf drawRect(ci::vec2(
-		0,
-		0),
-		ci::vec2(
-			size.x,
-			size.y));
-	ci::gl::draw(TEX.get("map"), drawRect);
-	ci::gl::color(1, 1, 1, 1);
-	TEX.get("map")->unbind();
-	ci::gl::popModelMatrix();
-
+	for (auto& it : pos) {
+		ci::gl::pushModelMatrix();
+		ci::gl::translate(it);
+		TEX.get("map")->bind();
+		ci::Rectf drawRect(ci::vec2(
+			0,
+			0),
+			ci::vec2(
+				size.x,
+				size.y));
+		ci::gl::draw(TEX.get("map"), drawRect);
+		ci::gl::color(1, 1, 1, 1);
+		TEX.get("map")->unbind();
+		ci::gl::popModelMatrix();
+	}
 
 
 }

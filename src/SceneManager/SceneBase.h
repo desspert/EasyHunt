@@ -1,7 +1,6 @@
 #pragma once
 #include <cinder/app/App.h>
 
-
 enum class SceneName {
 	TITLE,
 	SELECT,
@@ -16,6 +15,7 @@ public:
 	virtual void update(const float& delta_time) {};
 	virtual void draw() {};
 	virtual void setup() {};
+	virtual void shift(const SceneName& scene) {};
 	virtual void mouseDown(const ci::app::MouseEvent& event) {};
 	virtual void mouseDrag(const ci::app::MouseEvent& event) {};
 	virtual void mouseUp(const ci::app::MouseEvent& event) {};

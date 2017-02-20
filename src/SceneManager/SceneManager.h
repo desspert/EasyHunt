@@ -6,6 +6,7 @@
 #include "GameMain/GameMain.h"
 #include "Select/Select.h"
 #include "Result/Result.h"
+#define SCENE SceneManager::get()
 class SceneManager {
 public:
 
@@ -14,7 +15,7 @@ public:
 
 	}
 	
-	std::shared_ptr<SceneBase> scene;
+	std::unique_ptr<SceneBase> scene;
 	void setup();
 	void update(const float& delta_time);
 	void draw();
@@ -25,4 +26,9 @@ public:
 	void mouseDown(const ci::app::MouseEvent& event);
 	void mouseDrag(const ci::app::MouseEvent& event);
 	void mouseUp(const ci::app::MouseEvent& event);
+
+	static SceneManager& get() {
+		static SceneManager scene;
+		return scene;
+	}
 };

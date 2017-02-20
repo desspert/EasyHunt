@@ -3,6 +3,8 @@
 #include "dessUI/Easing/Easing.h"
 #include "HPGauge/HPGauge.h"
 #include "dessUI/Texture.h"
+#include "Event/Coroutine.h"
+class Player;
 static bool CollisionCircleToCircle(const ci::vec2& center1, const float& r1, const ci::vec2& center2, const float& r2) {
 	float x = (center1.x - center2.x)*(center1.x - center2.x);
 	float y = (center1.y - center2.y)*(center1.y - center2.y);
@@ -18,6 +20,8 @@ static ci::vec2 returnCircleToCircle(const ci::vec2& center1, const ci::vec2& ce
 	
 	return buf;
 }
+class ObjectBase;
+using object_coroutine = boost::coroutines::coroutine<ObjectBase*>;
 
 class ObjectBase {
 protected:
@@ -31,12 +35,19 @@ protected:
 	int hp_max;
 	bool is_dead;
 	float dead_count;
+	bool is_spawn;
 	bool is_active;
+
+	std::vector<CoroutineInfo> c_info;
+	object_coroutine::push_type startCoroutine;
+	float time;
+	
 public:
 	
 	ObjectBase(const ci::vec2& pos, const ci::vec2& size)
-		:pos(pos), size(size), radius(size.x / 2),
-		color(ci::vec4(1,1,1,1)), is_dead(false),is_active(true),dead_count(0){
+		:
+		startCoroutine(objectCoroutine),pos(pos), size(size), radius(size.x / 2),
+		color(ci::vec4(1,1,1,1)), is_dead(false),is_active(true),dead_count(0), is_spawn(false){
 	}
 	~ObjectBase() {}
 
@@ -62,7 +73,9 @@ public:
 	const bool& isActive() {
 		return is_active;
 	}
-
+	const int& getHP() {
+		return hp;
+	}
 	virtual void damage(const int& damage) {
 
 		if (c_Easing::isEnd(color.b)) {
@@ -89,7 +102,7 @@ public:
 	}
 	virtual void changeHP(const float& delta_time) {
 		gauge.update(delta_time);
-		gauge.changeGauge(hp, hp_max);
+		gauge.changeGauge(static_cast<float>(hp), static_cast<float>(hp_max));
 		if (gauge.getMin()) {
 
 			is_dead = true;
@@ -103,8 +116,40 @@ public:
 	void setSize(const ci::vec2& size) {
 		this->size = size;
 	}
-	virtual void attackPlayer(std::shared_ptr<ObjectBase>& player) {};
-	virtual void update(const float& delta_time) = 0;
+	void setSpawn(const bool& spawn) {
+		is_spawn = spawn;
+	}
+	virtual void attackPlayer(std::shared_ptr<Player>& player) {};
+	virtual void update(const float& delta_time) {
+		time -= delta_time;
+		if (time < 0)
+		{
+			startCoroutine(this);
+			time = time;
+		}
+	} 
+	static void objectCoroutine(object_coroutine::pull_type & yield) {
+		{
+			while (true)
+			{
+				while (yield().get()->is_spawn)
+				{
+					for (unsigned int i = 0; i < yield().get()->c_info.size(); i++)
+					{
+						yield().get()->time = yield().get()->c_info[i].time;
+						yield().get()->c_info[i].callback();
+						yield();
+					}
+					yield().get()->is_spawn = false;
+					break;
+				}
+				while (!yield().get()->is_spawn)
+				{
+					yield();
+				}
+			}
+		}
+	}
 	virtual void draw() = 0;
 	virtual void setup() = 0;
 };

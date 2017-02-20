@@ -1,4 +1,3 @@
-
 #pragma once
 #include"../../UIBase.h"
 
@@ -8,13 +7,15 @@ private:
 	des::Vec2f gauge_pos;
 	des::Vec2f gauge_size;
 	std::string gauge_texture_path;
-	bool gauge_max;
+	bool is_max;
+	bool is_min;
 	float gauge_max_x;
 	float gauge_max_y;
 public:
 	GaugeUI(des::Vec2f _pos, des::Vec2f _size, des::Vec4d _color) :UIBase(_pos, _size, _color)
 	{
-		gauge_max = false;
+		is_max = false;
+		is_min = false;
 		own_ui = UITYPE::GaugeUI;
 	};
 
@@ -31,7 +32,10 @@ public:
 		return gauge_size.y;
 	}
 	bool gaugeGetIsMax() {
-		return gauge_max;
+		return is_max;
+	}
+	bool gaugeGetIsMin() {
+		return is_min;
 	}
 	std::string gaugeGetTexturePath() {
 		return gauge_texture_path;

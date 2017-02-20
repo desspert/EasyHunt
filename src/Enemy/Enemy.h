@@ -5,6 +5,9 @@
 #include <cinder/gl/gl.h>
 #include "../Animation/Animation.h"
 #include "../Animation/Production/Dead/Dead.h"
+#include "../Animation/Production/Spawn/Spawn.h"
+
+
 class Enemy : public ObjectBase {
 protected:
 	int attack_point;
@@ -21,6 +24,6 @@ public:
 	virtual void setup();
 	virtual void update(const float& delta_time);
 	virtual void draw();
-	void attackPlayer(std::shared_ptr<ObjectBase>& player) {};
+	void attackPlayer(std::shared_ptr<Player>& player) {};
 	void isDead();
 };

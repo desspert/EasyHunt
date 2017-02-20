@@ -17,5 +17,5 @@ public:
 	void setup();
 	void update(const float& delta_time);
 	void draw();
-	void attackPlayer(std::shared_ptr<ObjectBase>& player);
+	void attackPlayer(std::shared_ptr<Player>& player);
 };

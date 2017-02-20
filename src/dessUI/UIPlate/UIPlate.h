@@ -5,16 +5,17 @@
 #include <cinder/imageIo.h>
 #include <cinder/gl/Texture.h> 
 #include "../UIManager/UIManager.h"
-#include <cinder/Camera.h>
+#include "../../ProductionCamera/ProductionCamera.h"
 
 class UIPlate : public UIManager
 {
-private:
+protected:
 	std::unordered_map<std::string, ci::Font> font;
-	std::unordered_map<std::string,ci::gl::TextureRef>		textures;
+	
 	std::unordered_map<std::string, ci::gl::TextureRef>		gauge_texture;
 	
 public:
+	std::unordered_map<std::string, ci::gl::TextureRef>		textures;
 	UIPlate() {
 		
 	};

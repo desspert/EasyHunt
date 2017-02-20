@@ -2,10 +2,20 @@
 
 void Enemy::setup()
 {
+	color.a = 0;
+	c_info.push_back(CoroutineInfo(0, [this]() {
+		ANIMATION.animationAdd<Spawn>(this->getPos(), radius);
+		return;
+	}));
+	c_info.push_back(CoroutineInfo(0.5f, [this]() {
+		c_Easing::apply(color.a, 1, EasingFunction::ElasticOut, 30);
+		return;
+	}));
 }
 
 void Enemy::update(const float& delta_time)
 {
+	ObjectBase::update(delta_time);
 	ObjectBase::changeHP(delta_time);
 	isDead();
 }

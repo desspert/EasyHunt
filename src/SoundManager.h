@@ -179,13 +179,16 @@ public:
 			it.second->stop();
 		}
 	}
+	void allCrear() {
+		sound.clear();
+	}
 
 private:
 
 	// ­‚µ‚¸‚Â“Ç‚İ‚Ş‚â‚Â‚ªfileplayer
 	// ˆê‹C‚É“Ç‚İ‚Ş‚â‚Â‚ªbufferplayer
 
-	std::unordered_map<std::string, std::shared_ptr<Sound>> sound;
+	std::map<std::string, std::shared_ptr<Sound>> sound;
 	std::unordered_map<std::string, std::string> keys;
 	ci::audio::Context* ctx;
 

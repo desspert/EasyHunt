@@ -39,8 +39,8 @@ public:
 		active_time = 0.5f;
 	}
 	Scratch(const ci::vec2& pos, const std::shared_ptr<ObjectBase>& obj,
-		const int& attack, const int& range,
-		ci::Font font) : AttackAnimation(pos, obj, attack, font){
+		const int& attack, const int& range
+		) : AttackAnimation(pos, obj, attack){
 		this->range = range;
 		TEX.set("Circle", "Player/Circle.png");
 		range_tex = TEX.get("Circle");

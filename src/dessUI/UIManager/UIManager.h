@@ -6,6 +6,7 @@
 #include "../UIs/IncrementTimeUI/IncrementTimeUI.h"
 #include "../UIs/DecrementTimeUI/DecrementTimeUI.h"
 #include "../UIs/AnimationUI/AnimationUI.h"
+#include "../UIs/ScrollUI/ScrollUI.h"
 #include "../Texture.h"
 #include <memory>
 #include "cinder/app/App.h"
@@ -23,11 +24,12 @@ class UIManager
 protected:
 	std::unordered_map<std::string, int> easing_type;
 	std::vector<std::string> ui_objects;
-	
+	std::vector<std::string> ui_scrolls_key;
 public:
 	UIManager() {};
 
 	std::unordered_map<std::string, std::shared_ptr<UIBase>> ui_data;
+	std::unordered_map<std::string, std::shared_ptr<UIBase>> ui_scroll;
 	void setEasing(const Json::Value& root,const std::string& it,const int& type);
 	void JsonInit(const dess::SceneName& scene);
 	void loadEasingType(const Json::Value& root_type);

@@ -122,7 +122,7 @@ public:
 		for (auto& it : easinginfo) { it.second.countIncrement(); };
 
 
-		for (auto& i = easinginfo.begin(); i != easinginfo.end();)
+		for (auto i = easinginfo.begin(); i != easinginfo.end();)
 		{
 			if (i->second.info.size() == 0) {
 				i = easinginfo.erase(i);
@@ -131,7 +131,6 @@ public:
 			i++;
 		}
 	}
-
 private:
 	static std::unordered_map <float*, c_AnimInfo>  easinginfo;
 

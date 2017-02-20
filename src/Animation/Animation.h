@@ -4,8 +4,8 @@
 #include <memory>
 #include <functional>
 
-#define ANIMATION Animation::get()
 
+#define ANIMATION Animation::get()
 class Animation {
 private:
 	std::list<std::shared_ptr<AnimationBase>> anim;
@@ -13,8 +13,6 @@ private:
 	std::map<AnimationType, ci::gl::TextureRef> textures;
 	std::vector<ci::gl::TextureRef> attack_texture;
 	AnimationData data;
-	ci::Font font;
-	
 public:
 	Animation(){}
 	void setup();
@@ -24,9 +22,7 @@ public:
 	void update(const float& delta_time);
 	void destroy();
 
-	ci::Font getFont() {
-		return font;
-	}
+	
 	std::vector<ci::gl::TextureRef> getAttackTexture() {
 		return attack_texture;
 	}

@@ -15,7 +15,8 @@ enum class UITYPE {
 	FontUI,
 	IncrementTimeUI,
 	DecrementTimeUI,
-	AnimationUI
+	AnimationUI,
+	ScrollUI
 };
 
 struct EasingBuf
@@ -116,6 +117,7 @@ public:
 	UITYPE getUIType() {
 		return own_ui;
 	}
+	
 	//----------------------------------------------------------
 
 
@@ -144,9 +146,10 @@ public:
 		}
 	}
     void setActive(const bool& active) {
-        if ( is_active &&
+        if ( is_active == true &&
             active == false) {
             end = true;
+			return;
         }
         is_active = active;
     }

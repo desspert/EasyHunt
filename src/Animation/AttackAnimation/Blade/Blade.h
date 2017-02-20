@@ -32,8 +32,8 @@ public:
 		active_time = 0.5f;
 	}
 	Blade(const ci::vec2& pos,const std::shared_ptr<ObjectBase>& obj,
-		const int& attack,
-		ci::Font font) : AttackAnimation(pos,obj,attack,font){
+		const int& attack
+		) : AttackAnimation(pos,obj,attack){
 		
 		texture = TEX.get("Blade");
 		size = ci::vec2(300, 300);
@@ -55,6 +55,7 @@ public:
 		font_pos = pos + ci::vec2(buf_x, buf_y);
 		SE.registerBufferPlayerNode("blade", "kiru2.wav");
 		active_time = 0.5f;
+        
 	}
 	void attackUpdate();
 

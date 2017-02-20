@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 SceneManager::SceneManager() {
-	scene = std::make_shared<GameMain>();
+	scene = std::make_unique<Select>();
 }
 
 void SceneManager::setup()
@@ -24,19 +24,19 @@ void SceneManager::shift(const SceneName& scene_name)
 	//cinderはコンストラクタでsetupを呼ぶと死ぬ
 	switch (scene_name) {
 	case SceneName::TITLE:
-		scene = std::make_shared<Title>();
+		scene = std::make_unique<Title>();
 		scene->setup();
 		break;
 	case SceneName::GAMEMAIN:
-		scene = std::make_shared<GameMain>();
+		scene = std::make_unique<GameMain>();
 		scene->setup();
 		break;
 	case SceneName::SELECT:
-		scene = std::make_shared<Select>();
+		scene = std::make_unique<Select>();
 		scene->setup();
 		break;
 	case SceneName::RESULT:
-		scene = std::make_shared<Result>();
+		scene = std::make_unique<Result>();
 		scene->setup();
 		break;
 	}

@@ -1,8 +1,9 @@
 #include "NormalEnemy.h"
-
+#include "../../Player/Player.h"
 void NormalEnemy::setup()
 {
 	Enemy::setup();
+	
 }
 
 void NormalEnemy::update(const float & delta_time)
@@ -19,15 +20,14 @@ void NormalEnemy::draw()
 	Enemy::draw();
 }
 
-void NormalEnemy::attackPlayer(std::shared_ptr<ObjectBase>& player)
+void NormalEnemy::attackPlayer(std::shared_ptr<Player>& player)
 {
 	if (CollisionCircleToCircle(pos, range, player->getPos(), player->getRradius())) {
 		if (is_attack) {
 			ANIMATION.animationAdd<Scratch>(pos + returnCircleToCircle(pos, player->getPPos(), player->getRradius()),
 				player,
 				attack_point,
-				range,
-				ANIMATION.getFont());
+				range);
 			is_attack = false;
 			attack_speed = attack_default;
 		}

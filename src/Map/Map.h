@@ -18,18 +18,16 @@ struct MapTip {
 
 class Map {
 private:
-	ci::vec2 pos;
+	std::vector<ci::vec2> pos;
 	ci::vec2 size;
-	ci::vec2 texture_size;
 
-	std::vector<std::vector<MapTip>> map;
 public:
 	Map() {
-		pos = ci::vec2(-2500, -2500);
-		size = ci::vec2(4000, 4000);
-		texture_size = ci::vec2(16);
-		TEX.set("map", "img15_1.gif");
+		size = ci::vec2(1500, 1000);
+		TEX.set("map", "MapData/MapTextures/img15_1.gif");
+
 	}
+	bool isClear(const std::list<std::shared_ptr<ObjectBase>>& enemy);
 	void setup(std::list<std::shared_ptr<ObjectBase>>& enemy);
 	void update(const float& delta_time);
 	void draw();

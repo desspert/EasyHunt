@@ -22,6 +22,9 @@ std::shared_ptr<UIBase> selectUIType(const int& type) {
 	case 5:
 		return std::make_shared<AnimationUI>(des::Vec2f(0, 0), des::Vec2f(0, 0), des::Vec4d(1, 1, 1, 1));
 		break;
+	case 6:
+		return std::make_shared<ScrollUI>(des::Vec2f(0, 0), des::Vec2f(0, 0), des::Vec4d(1, 1, 1, 1));
+		break;
 	}
 	return std::make_shared<CollisionUI>(des::Vec2f(0, 0), des::Vec2f(0, 0), des::Vec4d(1, 1, 1, 1));
 }
@@ -30,61 +33,61 @@ std::function<float(float, float, float)> selectEasing(int state) {
 	switch (state)
 	{
 	case 0:
-		return EasingFunction::BackIn;
+		return EasingFunction::Linear;
 		break;
 	case 1:
-		return EasingFunction::BackInOut;
+		return EasingFunction::BackIn;
 		break;
 	case 2:
-		return EasingFunction::BackOut;
+		return EasingFunction::BackInOut;
 		break;
 	case 3:
-		return EasingFunction::BounceIn;
+		return EasingFunction::BackOut;
 		break;
 	case 4:
-		return EasingFunction::BounceInOut;
+		return EasingFunction::BounceIn;
 		break;
 	case 5:
-		return EasingFunction::BounceOut;
+		return EasingFunction::BounceInOut;
 		break;
 	case 6:
-		return EasingFunction::CircIn;
+		return EasingFunction::BounceOut;
 		break;
 	case 7:
-		return EasingFunction::CircInOut;
+		return EasingFunction::CircIn;
 		break;
 	case 8:
-		return EasingFunction::CircOut;
+		return EasingFunction::CircInOut;
 		break;
 	case 9:
-		return EasingFunction::CubicIn;
+		return EasingFunction::CircOut;
 		break;
 	case 10:
-		return EasingFunction::CubicInOut;
+		return EasingFunction::CubicIn;
 		break;
 	case 11:
-		return EasingFunction::CubicOut;
+		return EasingFunction::CubicInOut;
 		break;
 	case 12:
-		return EasingFunction::ElasticIn;
+		return EasingFunction::CubicOut;
 		break;
 	case 13:
-		return EasingFunction::ElasticInOut;
+		return EasingFunction::ElasticIn;
 		break;
 	case 14:
-		return EasingFunction::ElasticOut;
+		return EasingFunction::ElasticInOut;
 		break;
 	case 15:
-		return EasingFunction::ExpoIn;
+		return EasingFunction::ElasticOut;
 		break;
 	case 16:
-		return EasingFunction::ExpoInOut;
+		return EasingFunction::ExpoIn;
 		break;
 	case 17:
-		return EasingFunction::ExpoOut;
+		return EasingFunction::ExpoInOut;
 		break;
 	case 18:
-		return EasingFunction::Linear;
+		return EasingFunction::ExpoOut;
 		break;
 	case 19:
 		return EasingFunction::QuadIn;
@@ -279,7 +282,8 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 			if (ui_data[(*it)]->getUIType() == UITYPE::NormalUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::CollisionUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::GaugeUI ||
-				ui_data[(*it)]->getUIType() == UITYPE::AnimationUI) {
+				ui_data[(*it)]->getUIType() == UITYPE::AnimationUI ||
+				ui_data[(*it)]->getUIType() == UITYPE::ScrollUI) {
 				//テクスチャのパスをセット
 				ui_data[(*it)]->setTexturePath(root[(*it)]["TexturePath"].asString());
 			}
@@ -294,11 +298,12 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 			ci::app::console() << root[(*it)]["Pos"][1].asFloat() << std::endl;
 			ci::app::console() << root[(*it)]["TexturePath"].asString() << std::endl;
 			ui_data[(*it)]->setPos(root[(*it)]["Pos"][0].asFloat(),root[(*it)]["Pos"][1].asFloat());
-
+			ui_data[(*it)]->setColor(root[(*it)]["Color"][0].asFloat(), root[(*it)]["Color"][1].asFloat(), root[(*it)]["Color"][2].asFloat(), root[(*it)]["Color"][3].asFloat());
 			if (ui_data[(*it)]->getUIType() == UITYPE::NormalUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::CollisionUI ||
 				ui_data[(*it)]->getUIType() == UITYPE::GaugeUI ||
-				ui_data[(*it)]->getUIType() == UITYPE::AnimationUI) {
+				ui_data[(*it)]->getUIType() == UITYPE::AnimationUI ||
+				ui_data[(*it)]->getUIType() == UITYPE::ScrollUI) {
 				//初期Sizeをjsonからセット
 				ui_data[(*it)]->setSize(root[(*it)]["Size"][0].asFloat(),
 					root[(*it)]["Size"][1].asFloat());
@@ -318,7 +323,8 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 			setEasing(root[(*it)]["EaseUpdate"], *it,3);
 
 			//CollisionUIの場合のjsonのセット
-			if (root[(*it)]["UIType"].asString() == "CollisionUI") {
+			if (root[(*it)]["UIType"].asString() == "CollisionUI" ||
+				root[(*it)]["UIType"].asString() == "ScrollUI") {
 				setEasing(root[(*it)]["EaseCollision"], *it,4);
 			}
 
@@ -334,7 +340,7 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 
 				//Gauge初期Sizeをjsonからセット
 				ui_data[(*it)]->gaugeSetSize(root[(*it)]["GaugeSize"][0].asFloat(),
-					root[(*it)]["GaugeSize"][0].asFloat());
+					root[(*it)]["GaugeSize"][1].asFloat());
 
 			}
 
@@ -364,6 +370,11 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 				ui_data[(*it)]->animationSetBetween(root[(*it)]["Between"].asFloat());
 
 				ui_data[(*it)]->animationSetLooping(root[(*it)]["Looping"].asBool());
+			}
+
+			if (ui_data[(*it)]->getUIType() == UITYPE::ScrollUI) {
+				ui_scrolls_key.push_back((*it));
+				ui_scroll[(*it)] = ui_data[(*it)];
 			}
 		}
 	}
