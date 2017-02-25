@@ -1,13 +1,13 @@
 #include "GameMain.h"
 using gamemain_coroutine = boost::coroutines::coroutine<GameMain*>;
-struct GameMain::_coroutine
+struct GameMain::GameMainProduction
 {
 	std::vector<CoroutineInfo>& c_info;
 	gamemain_coroutine::push_type startCoroutine;
 	GameMain& parent;
 
 
-	_coroutine(GameMain& parent) :
+	GameMainProduction(GameMain& parent) :
 		startCoroutine(gameMainCoroutine), parent(parent), c_info(parent.c_info) {
 		parent.time = 0;
 	}
@@ -89,7 +89,7 @@ struct GameMain::_coroutine
 
 	void clear()
 	{
-		c_info.push_back(CoroutineInfo(0, [&]() {
+		c_info.push_back(CoroutineInfo(0, [this]() {
 			SE.find("bgm")->stop();
 			parent.pause = true;
 			return;
@@ -99,19 +99,26 @@ struct GameMain::_coroutine
 			return;
 		}));
 		
-		for (int i = 0; i < 16; i++) {
+		c_info.push_back(CoroutineInfo(1, [&]() {
+			parent.ui.ui_data["Fade"]->setActive(true);
 			std::random_device rd;
 			std::mt19937 mt(rd());
-			std::uniform_real_distribution<float> random(0.3f,1);
-			float buf = random(mt);
-			c_info.push_back(CoroutineInfo(buf, [&]() {
+			std::uniform_real_distribution<float> random_x(-200, 200);
+			std::uniform_real_distribution<float> random_y(-400, 400);
+			float buf_x = random_x(mt);
+			float buf_y = random_y(mt);
+			ANIMATION.animationAdd<FireWorks>(ci::vec2(buf_x, buf_y), 400);
+		}));
+		for (int i = 0; i < 15; i++) {
+			
+			c_info.push_back(CoroutineInfo(0.5f, [&]() {
 				std::random_device rd;
 				std::mt19937 mt(rd());
 				std::uniform_real_distribution<float> random_x(-200,200);
 				std::uniform_real_distribution<float> random_y(-400,400);
 				float buf_x = random_x(mt);
 				float buf_y = random_y(mt);
-				ANIMATION.animationAdd<FireWorks>(ci::vec2(buf_x, buf_y), 200);
+				ANIMATION.animationAdd<FireWorks>(ci::vec2(buf_x, buf_y), 400);
 			}));
 		}
 		c_info.push_back(CoroutineInfo(1, [&]() {

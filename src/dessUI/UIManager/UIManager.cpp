@@ -288,7 +288,7 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 				ui_data[(*it)]->setTexturePath(root[(*it)]["TexturePath"].asString());
 			}
 			else {
-				ui_data[(*it)]->setTexturePath(root[(*it)]["FontPath"].asString());
+				//ui_data[(*it)]->fontSetPath(root[(*it)]["FontPath"].asString());
 			}
 
 			
@@ -345,7 +345,14 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 			}
 
 			//FontUIの場合のTextをセット
-			if (ui_data[(*it)]->getUIType() == UITYPE::FontUI) {
+			if (ui_data[(*it)]->getUIType() == UITYPE::FontUI||
+				ui_data[(*it)]->getUIType() == UITYPE::ScrollUI) {
+				ui_data[(*it)]->fontSetScale(root[(*it)]["FontScale"].asFloat());
+				ui_data[(*it)]->fontSetColor(
+					root[(*it)]["FontColor"][0].asFloat(),
+					root[(*it)]["FontColor"][1].asFloat(),
+					root[(*it)]["FontColor"][2].asFloat(),
+					root[(*it)]["FontColor"][3].asFloat());
 				ui_data[(*it)]->fontSetText(root[(*it)]["Text"].asString());
 			}
 
@@ -373,8 +380,10 @@ void UIManager::JsonInit(const dess::SceneName& scene)
 			}
 
 			if (ui_data[(*it)]->getUIType() == UITYPE::ScrollUI) {
+				ui_data[(*it)]->fontSetPos(root[(*it)]["FontPos"][0].asFloat(),
+					root[(*it)]["FontPos"][1].asFloat());
 				ui_scrolls_key.push_back((*it));
-				ui_scroll[(*it)] = ui_data[(*it)];
+				scroll_scales[(*it)] = 1;
 			}
 		}
 	}

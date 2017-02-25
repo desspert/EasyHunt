@@ -22,6 +22,7 @@ void Gasya::update(const float & delta_time)
 
 void Gasya::draw()
 {
+	if (animation_count == 0) return;
 	ci::gl::pushModelMatrix();
 	texture->bind();
 	ci::gl::translate(pos);

@@ -21,9 +21,10 @@ void FireWorks::update(const float & delta_time)
 
 void FireWorks::draw()
 {
+	if (animation_count == 0) return;
 	ci::gl::pushModelMatrix();
-	ci::gl::translate(ci::vec3(CAMERA.getPos().x, CAMERA.getPos().y, -1500));
 	texture->bind();
+	ci::gl::translate(ci::vec3(CAMERA.getPos().x, CAMERA.getPos().y, CAMERA.getPos().z +1500));
 	ci::gl::translate(pos);
 	ci::gl::translate(ci::vec2(-size.x / 2, -size.y / 2));
 	ci::Rectf drawRect(ci::vec2(

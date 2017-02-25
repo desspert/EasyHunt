@@ -115,3 +115,4 @@ void CollisionUI::EaseCollisionUpdate()
 
 
 }
+

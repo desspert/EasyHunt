@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 SceneManager::SceneManager() {
-	scene = std::make_unique<Select>();
+	scene = new Select();
 }
 
 void SceneManager::setup()
@@ -21,23 +21,23 @@ void SceneManager::draw()
 
 void SceneManager::shift(const SceneName& scene_name)
 {
-	//cinderはコンストラクタでsetupを呼ぶと死ぬ
+    delete scene;
 	switch (scene_name) {
 	case SceneName::TITLE:
-		scene = std::make_unique<Title>();
+		scene = new Title();
 		scene->setup();
 		break;
 	case SceneName::GAMEMAIN:
-		scene = std::make_unique<GameMain>();
+		scene = new GameMain();
 		scene->setup();
 		break;
 	case SceneName::SELECT:
-		scene = std::make_unique<Select>();
-		scene->setup();
+            scene = new Select();
+            scene->setup();
 		break;
 	case SceneName::RESULT:
-		scene = std::make_unique<Result>();
-		scene->setup();
+            scene = new Result();
+            scene->setup();
 		break;
 	}
 }

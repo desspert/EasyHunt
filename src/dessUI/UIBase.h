@@ -9,14 +9,14 @@
 #include <functional>
 
 enum class UITYPE {
-	NormalUI,
 	CollisionUI,
-	GaugeUI,
 	FontUI,
+	GaugeUI,
 	IncrementTimeUI,
 	DecrementTimeUI,
 	AnimationUI,
-	ScrollUI
+	ScrollUI,
+	NormalUI
 };
 
 struct EasingBuf
@@ -105,6 +105,20 @@ public:
 		return color.w;
 	}
 
+	bool isEasingEnd() {
+		if (c_Easing::isEnd(pos.x) &&
+			c_Easing::isEnd(pos.y) &&
+			c_Easing::isEnd(size.x) &&
+			c_Easing::isEnd(size.y) &&
+			c_Easing::isEnd(color.x) &&
+			c_Easing::isEnd(color.y) &&
+			c_Easing::isEnd(color.z) &&
+			c_Easing::isEnd(color.w)) {
+			return true;
+		}
+		return false;
+	}
+
 	std::string getTexturePath() {
 		return texture_path;
 	}
@@ -158,9 +172,15 @@ public:
 
 
 	//“_‚Æ‚Ì“–‚½‚è”»’è
-	virtual bool collisionToUI(des::Vec2f _pos) { return false; };
+	virtual bool collisionToUI(des::Vec2f _pos) { 
+		if (!is_active) return false;
+		return false; 
+	};
 	//ŽlŠp‚Æ‚Ì“–‚½‚è”»’è
-	virtual bool collisionToUI(des::Vec2f _pos, des::Vec2f _size) { return false; };
+	virtual bool collisionToUI(des::Vec2f _pos, des::Vec2f _size) {
+		if (!is_active) return false;
+		return false;
+	};
 
 	//GaugeUI
 	virtual float gaugeGetPosX() { return 0.0f; }
@@ -184,6 +204,7 @@ public:
 	virtual void gaugeChangeY(float value, float max) {}
 
 	//FontUI
+	
 	virtual std::string fontGetText() {
 		return "‰½‚à“ü—Í‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ";
 	}
@@ -237,6 +258,29 @@ public:
 	virtual void animationSetLooping(const bool& looping) {}
 	virtual void animationSetIsEnding(const bool& animation_end) {}
 	virtual void animationSetBetween(const float& between) {}
+
+	//ScrollUI
+	virtual float fontGetColorR() {
+		return 0.0f;
+	}
+	virtual float fontGetColorG() {
+		return 0.0f;
+	}
+	virtual float fontGetColorB() {
+		return 0.0f;
+	}
+	virtual float fontGetColorA() {
+		return 0.0f;
+	}
+	virtual float fontGetScale() {
+		return 0.0f;
+	}
+	virtual float fontGetPosX() { return 0.0f; }
+	virtual float fontGetPosY() { return 0.0f; }
+
+	virtual void fontSetColor(const float& color_r, const float& color_g, const float& color_b, const float& color_a) {}
+	virtual void fontSetPos(const float& pos_x, const float& pos_y) {}
+	virtual void fontSetScale(const float& scale) {}
 };
 
 

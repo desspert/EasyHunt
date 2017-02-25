@@ -6,13 +6,14 @@
 #include "../../Event/Coroutine.h"
 #include "../../Animation/Production/GasyaSpawn/GasyaSpawn.h"
 #include "../../Animation/Production/GasyaEnd/GasyaEnd.h"
-namespace select {
+#include<memory>
+namespace select_ {
 	enum WINDOW_SIZE {
 		WINDOW_WIDTH = 640,
 		WINDOW_HEIGHT = 960
 	};
 }
-
+ 
 class Select : public SceneBase
 { 
 private:
@@ -21,12 +22,15 @@ private:
 
 	std::vector<CoroutineInfo> c_info;
 	float time;
+	int releaseChara;
 	bool pause;
 	bool is_start;
 	bool gasya_production;
 public:
 	Select();
-	 
+    ~Select(){
+        
+    }
 	struct _coroutine;
 	std::shared_ptr<_coroutine> _m;
 

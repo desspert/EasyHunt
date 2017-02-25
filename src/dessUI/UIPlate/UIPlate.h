@@ -10,12 +10,12 @@
 class UIPlate : public UIManager
 {
 protected:
-	std::unordered_map<std::string, ci::Font> font;
+	std::unordered_map<std::string, ci::TextLayout> font;
 	
-	std::unordered_map<std::string, ci::gl::TextureRef>		gauge_texture;
+	std::unordered_map<std::string, ci::gl::TextureRef>	gauge_texture;
 	
 public:
-	std::unordered_map<std::string, ci::gl::TextureRef>		textures;
+	std::unordered_map<std::string, ci::gl::TextureRef>	textures;
 	UIPlate() {
 		
 	};

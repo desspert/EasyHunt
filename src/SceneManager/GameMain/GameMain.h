@@ -6,7 +6,8 @@
 #include "../../Enemy/Enemy.h"
 #include "../../Map/Map.h"
 #include "../../Event/Coroutine.h"
- 
+#include "../../Data/Data.h"
+
 class GameMain : public SceneBase
 {
 private:
@@ -25,8 +26,8 @@ public:
 	GameMain();
 	
 
-	struct _coroutine;
-	std::shared_ptr<_coroutine> _m;
+	struct GameMainProduction;
+	std::shared_ptr<GameMainProduction> _m;
 
 	
 	void update(const float& delta_time) override;

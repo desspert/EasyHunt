@@ -24,6 +24,7 @@ void Dead::update(const float & delta_time)
 
 void Dead::draw()
 {
+	if (animation_count == 0) return;
 	ci::gl::pushModelMatrix();
 
 	texture->bind();

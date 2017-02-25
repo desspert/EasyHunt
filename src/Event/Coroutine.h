@@ -1,5 +1,5 @@
 #pragma once
-#include <boost/coroutine/all.hpp>
+#include "../../Cinder/include/boost/coroutine/all.hpp"
 
 struct CoroutineInfo
 {

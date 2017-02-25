@@ -66,8 +66,6 @@ struct Select::_coroutine
 					yield().get()->ui.isGasya() = false;
 					break;
 				}
-				
-				
 			}
 
 			while (yield().get()->gasya_production)
@@ -93,8 +91,6 @@ struct Select::_coroutine
 				break;
 			}
 		}
-
-
 	}
 	void setup()
 	{
@@ -102,18 +98,22 @@ struct Select::_coroutine
 	}
 	void start()
 	{
-		
 		c_info.push_back(CoroutineInfo(1, [&]() {
 			SE.find("SelectBGM")->start();
 			SE.find("SelectBGM")->setLoopEnabled(true);
 			c_Easing::apply(CAMERA.fade_out.a, 0, EasingFunction::Linear, 90);
 			return;
 		}));
-		
+
 	}
 	void gasyaMove() {
-		c_info.push_back(CoroutineInfo(0, [&]() {
+		c_info.push_back(CoroutineInfo(0, [this]() {
 			c_Easing::apply(CAMERA.fade_out.a, 1, EasingFunction::Linear, 30);
+			std::random_device rd;
+			std::mt19937 mt(rd());
+			std::uniform_real_distribution<float> rand(0, 100);
+			parent.releaseChara = rand(mt);
+
 			return;
 		}));
 		c_info.push_back(CoroutineInfo(1, [&]() {
@@ -124,25 +124,32 @@ struct Select::_coroutine
 			SE.registerBufferPlayerNode("GasyaNormal", "SE/normal.mp3");
 			SE.registerBufferPlayerNode("GasyaRare", "SE/rare.wav");
 			SE.registerBufferPlayerNode("RareJingle", "SE/jingle1.mp3");
-			auto img_range = ci::loadImage(ci::app::loadAsset("Characters/Star3/Blaze/murayakimen02-mv.png"));
-			parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_range);
+			selectCharacter();
 			return;
 		}));
-		
+
 		c_info.push_back(CoroutineInfo(1, [&]() {
 			c_Easing::apply(CAMERA.fade_out.a, 0, EasingFunction::Linear, 60);
+			return;
+		}));
+		c_info.push_back(CoroutineInfo(1, [&]() {
+			ci::app::console() << static_cast<int>(parent.releaseChara) << std::endl;
+			if (static_cast<int>(parent.releaseChara) <= 30) {
+				parent.ui.ui_data["GasyaBall"]->setColor(0.3f,0.3f,1,1);
+				parent.ui.ui_data["GasyaBall"]->setActive(true);
+				ANIMATION.animationAdd<GasyaSpawn>(ci::vec2(1300, 500), 1000);
+				SE.find("GasyaRare")->start();
+			}
+			else {
+				parent.ui.ui_data["GasyaBall"]->setColor(1,1, 1, 1);
+				parent.ui.ui_data["GasyaBall"]->setActive(true);
+				ANIMATION.animationAdd<GasyaSpawn>(ci::vec2(1300, 500), 1000);
+				SE.find("GasyaNormal")->start();
+			}
 			
 			return;
 		}));
-		c_info.push_back(CoroutineInfo(1, [&]() {
-			parent.ui.ui_data["GasyaBall"]->setActive(true);
-			ANIMATION.animationAdd<GasyaSpawn>(ci::vec2(1300, 500), 1000);
-			SE.find("GasyaNormal")->start();
-			parent.pause = false;
-			return;
-		}));
-		
-		
+
 	}
 	void gasyaProduction() {
 
@@ -163,7 +170,7 @@ struct Select::_coroutine
 		}));
 
 		c_info.push_back(CoroutineInfo(0.5f, [&]() {
-			CAMERA.fade_out = ci::vec4(1,1,1,0);
+			CAMERA.fade_out = ci::vec4(1, 1, 1, 0);
 			c_Easing::apply(CAMERA.fade_out.a, 1, EasingFunction::Linear, 30);
 			return;
 		}));
@@ -174,18 +181,91 @@ struct Select::_coroutine
 			return;
 		}));
 
-		c_info.push_back(CoroutineInfo(1, [&]() {
-			parent.ui.ui_data["GasyaChara"]->setActive(true);
-			ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
-			return;
-		}));
-		for (int i = 0; i < 10; i++) {
+		if (static_cast<int>(parent.releaseChara) >= 30) {
 			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star1"]->setActive(true);
+				return;
+			}));
+
+			c_info.push_back(CoroutineInfo(0, [&]() {
+				parent.ui.ui_data["GasyaChara"]->setActive(true);
 				ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
 				return;
 			}));
 		}
+		if (static_cast<int>(parent.releaseChara) < 30 &&
+			static_cast<int>(parent.releaseChara) > 3) {
+			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star2"]->setActive(true);
+				return;
+			}));
+			c_info.push_back(CoroutineInfo(0, [&]() {
+				parent.ui.ui_data["GasyaChara"]->setActive(true);
+				ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
+				return;
+			}));
+			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star3"]->setActive(true);
+				return;
+			}));
+		}
+		if (static_cast<int>(parent.releaseChara) <= 3) {
+			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star1"]->setActive(true);
+				return;
+			}));
 
+			c_info.push_back(CoroutineInfo(0, [&]() {
+				parent.ui.ui_data["GasyaChara"]->setActive(true);
+				ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
+				return;
+			}));
+			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star2"]->setActive(true);
+				return;
+			}));
+			c_info.push_back(CoroutineInfo(0, [&]() {
+				parent.ui.ui_data["GasyaChara"]->setActive(true);
+				ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
+				return;
+			}));
+			c_info.push_back(CoroutineInfo(1, [&]() {
+				parent.ui.ui_data["Star3"]->setActive(true);
+				return;
+			}));
+		}
+
+		
+		for (int i = 0; i < 2; i++) {
+			c_info.push_back(CoroutineInfo(2, [&]() {
+				ANIMATION.animationAdd<GasyaEnd>(ci::vec2(1300, 500), 1000);
+				return;
+			}));
+		}
+		
+		c_info.push_back(CoroutineInfo(1, [this]() {
+			CAMERA.fade_out = ci::vec4(0, 0, 0, 0);
+			c_Easing::apply(CAMERA.fade_out.a, 1, EasingFunction::Linear, 30);
+			parent.ui.ui_data["GasyaChara"]->setActive(false);
+			parent.ui.ui_data["Star3"]->setActive(false);
+			parent.ui.ui_data["Star2"]->setActive(false);
+			parent.ui.ui_data["Star1"]->setActive(false);
+			parent.ui.ui_data["GasyaBall"]->setActive(false);
+			parent.pause = false;
+			parent.gasya_production = false;
+			return;
+		}));
+
+		c_info.push_back(CoroutineInfo(1, [this]() {
+			parent.camera_pos.x = 0;
+			return;
+		}));
+
+		c_info.push_back(CoroutineInfo(1, [this]() {
+			c_Easing::apply(CAMERA.fade_out.a, 0, EasingFunction::Linear, 90);
+			return;
+		}));
+		
 	}
 	void end()
 	{
@@ -199,12 +279,65 @@ struct Select::_coroutine
 		}));
 
 	}
+	void selectCharacter() {
+		Json::Value root_type;
+		Json::Reader reader;
+		if (reader.parse(loadString("SaveData/CharactersData.json"), root_type)) {
+			int size = 0;
+			int selected_chara = 0;
+			if (static_cast<int>(parent.releaseChara) >= 30) {
+				size = root_type["Star1"].size();
+				std::random_device rd;
+				std::mt19937 mt(rd());
+				std::uniform_real_distribution<float> rand(0, size);
+				selected_chara = rand(mt);
+
+				auto it = root_type["Star1"].begin();
+				for (int i = 0; i < selected_chara; i++) {
+					it++;
+				}
+				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
+				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
+
+				//PLAYERDATA.characters[(*it)["Name"].asString()].rare = (*it)["Rare"].asInt();
+
+			}
+			if (static_cast<int>(parent.releaseChara) < 30 &&
+				static_cast<int>(parent.releaseChara) > 3) {
+				size = root_type["Star2"].size();
+				std::random_device rd;
+				std::mt19937 mt(rd());
+				std::uniform_real_distribution<float> rand(0, size);
+				selected_chara = rand(mt);
+
+				auto it = root_type["Star2"].begin();
+				for (int i = 0; i < selected_chara; i++) {
+					it++;
+				}
+				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
+				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
+			}
+			if (static_cast<int>(parent.releaseChara) <= 3) {
+				size = root_type["Star3"].size();
+				std::random_device rd;
+				std::mt19937 mt(rd());
+				std::uniform_real_distribution<float> rand(0, size);
+				selected_chara = rand(mt);
+
+				auto it = root_type["Star3"].begin();
+				for (int i = 0; i < selected_chara; i++) {
+					it++;
+				}
+				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
+				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
+			}
+		}
+	}
 	void shift() {
 		SE.allStop();
 		SE.allCrear();
 		SCENE.shift(SceneName::GAMEMAIN);
 	}
-	
-};
 
+};
 

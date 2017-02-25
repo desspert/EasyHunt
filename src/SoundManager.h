@@ -5,7 +5,6 @@
 #include "cinder/app/App.h"
 #include "cinder/gl/gl.h"
 #include <unordered_map>
-
 #define SE SoundManager::get()
 
 //class SoundManager

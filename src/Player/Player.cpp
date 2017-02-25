@@ -6,11 +6,11 @@ void Player::attack(std::list<std::shared_ptr<ObjectBase>>& objects)
 {
 	for (auto& it : objects) {
 		EnemyCollision(pos, size, radius, it->getPos(), it->getSize(), it->getRradius());
-		if (CollisionCircleToCircle(pos, radius*weapon.range/100, it->getPPos(), it->getRradius())) {
+		if (CollisionCircleToCircle(pos, radius*status.range/100, it->getPPos(), it->getRradius())) {
 			if (is_attack) {
 				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos(), it->getRradius()),
 				it,
-				1325);
+				status.attack);
 				break;
 			}
 		}
@@ -23,7 +23,7 @@ void Player::attackSpeed(const float& delta_time)
 	attack_speed -= delta_time;
 	if (attack_speed < 0) {
 		is_attack = true;
-		attack_speed = weapon.attack_speed;
+		attack_speed = status.attack_speed;
 	}
 }
 
@@ -78,6 +78,7 @@ void Player::touchesEnded(ci::app::TouchEvent event)
 
 void Player::setup()
 {
+	TEX.set("player", status.texture_path);
 	auto img_range = ci::loadImage(ci::app::loadAsset("Player/Circle.png"));
 	attack_range = ci::gl::Texture2d::create(img_range);
 	
@@ -99,15 +100,15 @@ void Player::draw()
 	ci::gl::pushModelMatrix();
 	ci::gl::translate(pos);
 	ci::gl::rotate(rotate);
-	ci::gl::translate(ci::vec2(-size.x * (weapon.range / 100)/2, -size.y * (weapon.range / 100) / 2));
+	ci::gl::translate(ci::vec2(-size.x * (status.range / 100)/2, -size.y * (status.range / 100) / 2));
 	attack_range->bind();
 	ci::gl::color(1, 0, 0, 0.2f);
 	ci::Rectf drawRange(ci::vec2(
 		0,
 		0),
 		ci::vec2(
-			size.x * weapon.range / 100,
-			size.y * weapon.range / 100));
+			size.x * status.range / 100,
+			size.y * status.range / 100));
 	ci::gl::draw(attack_range, drawRange);
 	ci::gl::color(1, 1, 1, 1);
 	attack_range->unbind();
@@ -135,7 +136,7 @@ void Player::draw()
 	ci::gl::translate(pos);
 	ci::gl::rotate(rotate);
 	ci::gl::translate(ci::vec2(-size.x / 2, -size.y / 2));
-	texture->bind();
+	TEX.get("player")->bind();
 	ci::gl::color(color.r, color.g, color.b, color.a);
 	ci::Rectf drawRect(ci::vec2(
 		0,
@@ -143,9 +144,9 @@ void Player::draw()
 		ci::vec2(
 			size.x,
 			size.y));
-	ci::gl::draw(texture, drawRect);
+	ci::gl::draw(TEX.get("player"), drawRect);
 	ci::gl::color(1, 1, 1, 1);
-	texture->unbind();
+	TEX.get("player")->unbind();
 	ci::gl::popModelMatrix();
 
 

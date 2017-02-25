@@ -43,7 +43,10 @@ void Map::setup(std::list<std::shared_ptr<ObjectBase>>& enemy)
 	}
 	Json::Value root_type;
 	Json::Reader reader;
-	if (reader.parse(loadString("MapData/MapData1.json"), root_type)) {
+	if (reader.parse(loadString("MapData/MapData" + std::to_string(PLAYERDATA.getSelectedMap()) + ".json"), root_type)) {
+		for (auto it = root_type["Players"].begin(); it != root_type["Players"].end(); it++) {
+			players_pos.push_back(ci::vec2((*it)["Pos"][0].asInt(), (*it)["Pos"][1].asInt()));
+		}
 		for (auto it = root_type["Enemys"].begin(); it != root_type["Enemys"].end(); it++) {
 			ci::vec2 pos = ci::vec2((*it)["Pos"][0].asFloat(), (*it)["Pos"][1].asFloat());
 			ci::vec2 size = ci::vec2((*it)["Size"].asFloat(), (*it)["Size"].asFloat());

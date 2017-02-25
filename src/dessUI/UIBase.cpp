@@ -45,7 +45,6 @@ UIBase::UIBase(des::Vec2f _pos, des::Vec2f _size, des::Vec4d _color)
 	start = 0;
 	end = false;
 	end_count = 0;
-	own_ui = UITYPE::NormalUI;
 
 }
 

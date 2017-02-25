@@ -5,7 +5,7 @@
 #include "../../../Animation/Animation.h"
 #include "../../../Animation/Production/Gasya/Gasya.h"
 class SelectUI : public UIPlate
-{
+{ 
 private:
 	ci::vec2 scroll_pos;
 	ci::vec2 move_pos;
@@ -14,6 +14,7 @@ private:
 	bool is_end;
 	bool is_gasya;
 	std::shared_ptr<bool*> pause;
+	
 public:
 	SelectUI(){
 		is_end = false;
@@ -44,7 +45,8 @@ public:
 	void touchesMoved(ci::app::TouchEvent event);
 	void touchesEnded(ci::app::TouchEvent event);
 
-
+	void selectGasya();
+	void saveGasya();
 	void sceneBattle();
 	void sceneGasya();
 	void sceneOption();

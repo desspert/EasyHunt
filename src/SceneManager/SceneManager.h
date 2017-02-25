@@ -12,10 +12,10 @@ public:
 
 	SceneManager();
 	~SceneManager() {
-
+        delete scene;
 	}
 	
-	std::unique_ptr<SceneBase> scene;
+	SceneBase* scene;
 	void setup();
 	void update(const float& delta_time);
 	void draw();

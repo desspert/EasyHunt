@@ -1,12 +1,12 @@
 #include "GameMain.h"
 #include "GameMainProductions.cpp"
-GameMain::GameMain() : _m(std::make_shared<_coroutine>(*this)) {
+GameMain::GameMain() : _m(std::make_shared<GameMainProduction>(*this))
+{
 	is_clear = false;
 	is_start = true;
 	pause = false;
 	TEX.set("Blade", "attack.png");
 	TEX.set("Slashing", "Attack/attack.png");
-	TEX.set("player", "Characters/Star3/Blaze/murayakimen02-mv.png");
 	TEX.set("Dead", "Enemy/dead.png");
 	TEX.set("Spawn", "Enemy/spawn.png");
 	TEX.set("FireWorks", "MapData/MapTextures/firework.png");
@@ -16,40 +16,40 @@ GameMain::GameMain() : _m(std::make_shared<_coroutine>(*this)) {
 	SE.registerBufferPlayerNode("FireWorks1", "SE/firework1.mp3");
 	SE.registerBufferPlayerNode("FireWorks2", "SE/firework1.mp3");
 	SE.registerBufferPlayerNode("FireWorks3", "SE/firework1.mp3");
-	player = std::make_shared<Player>(ci::vec2(700, 700), ci::vec2(100, 100), TEX.get("player"), Status(1000, 10, 300, ""), Weapon(10, 0.2f, 300, ""));
-	ui.setMaxHP(player->getHP());
-
-	CAMERA.followingCamera(&player->getPPos(), ci::vec2(0));
+	
+	
 }
 
 
 
 void GameMain::update(const float& delta_time)
 {
-	ANIMATION.update(delta_time);
-	_m->update(delta_time);
-
-
-	if (pause) return;
-
-
-	ui.setHP(player->getHP());
 	ui.update(delta_time);
-	player->update(delta_time);
-	for (auto it : objects) {
-		it->update(delta_time);
-		it->attackPlayer(player);
-	}
+	ANIMATION.update(delta_time);
 	
-	player->attack(objects);
 
-	for (auto it = objects.begin(); it != objects.end(); it++) {
-		if (!(*it)->isActive()) {
-			objects.erase(it);
-			break;
+	if (!pause) {
+
+
+		ui.setHP(player->getHP());
+		
+		player->update(delta_time);
+		for (auto it : objects) {
+			it->update(delta_time);
+			it->attackPlayer(player);
 		}
+
+		player->attack(objects);
+
+		for (auto it = objects.begin(); it != objects.end(); it++) {
+			if (!(*it)->isActive()) {
+				objects.erase(it);
+				break;
+			}
+		}
+		is_clear = map.isClear(objects);
 	}
-	is_clear = map.isClear(objects);
+	_m->update(delta_time);
 }
 
 void GameMain::draw()
@@ -63,7 +63,7 @@ void GameMain::draw()
 	ANIMATION.draw();
 	
 	ci::gl::pushModelView();
-	ci::gl::translate(ci::vec3(CAMERA.getPos().x - camera_::WIDTH/2, CAMERA.getPos().y - camera_::HEIGHT/2, -1500));
+	ci::gl::translate(ci::vec3(CAMERA.getPos().x - (camera_::WIDTH / 2), CAMERA.getPos().y - (camera_::HEIGHT / 2), CAMERA.getPos().z + 1500));
 	ui.draw();
 	ci::gl::popModelView();
 }
@@ -71,12 +71,17 @@ void GameMain::draw()
 void GameMain::setup()
 {
 	SE.registerFilePlayerNode("bgm", "Music/Decisive_Battle.mp3");
-	
-
+	map.setup(objects);
+	player = std::make_shared<Player>(map.getPlayerPos(0), PLAYERDATA.getSelectedCharacter());
 	ui.setup(dess::SceneName::GAMEMAIN);
 	player->setup();
+	ui.setMaxHP(player->getHP());
+	CAMERA.followingCamera(&player->getPPos(), ci::vec2(0));
+
+
 	ANIMATION.setup();
-	map.setup(objects);
+	
+	
 	_m->setup();
 	for (auto it : objects) {
 		it->setup();
@@ -86,8 +91,12 @@ void GameMain::setup()
 void GameMain::mouseDown(const ci::app::MouseEvent & event)
 {
 	player->mouseDown(event);
-	
-	
+	if (event.isControlDown()) {
+		CAMERA.setCameraZ(+200);
+	}
+	if (event.isRightDown()) {
+		CAMERA.setCameraZ(-200);
+	}
 }
 
 void GameMain::mouseDrag(const ci::app::MouseEvent & event)
