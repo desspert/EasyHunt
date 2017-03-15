@@ -60,6 +60,7 @@ void Scratch::damageUpdate()
 	if (font_count == 1) {
 		if (CollisionCircleToCircle(pos, range/2, obj->getPos(), 0)) {
 			obj->damage(attack);
+			font_pos = obj->getPos();
 			font_color = ci::vec4(1, 0, 0, 1);
 			c_Easing::apply(attack_color.a, 0.0f, EasingFunction::BounceIn, 10);
 			c_Easing::apply(font_scale.x, 0.5f, EasingFunction::BounceIn, 10);

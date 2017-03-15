@@ -5,6 +5,7 @@
 #include <cinder/gl/Texture.h> 
 #include <cinder/gl/gl.h>
 #include "../Animation/Production/FireWorks/FireWorks.h"
+#include <random>
 #define CAMERA ProductionCamera::get()
 
 namespace camera_ {
@@ -22,6 +23,8 @@ class ProductionCamera {
 	ci::vec2 buf_pos;
 	std::shared_ptr<ci::vec2*> reference_pos;
 	float camera_z;
+	float scatter;
+	float seconds;
 	ci::vec2 camera_size;
 	
 	ci::gl::TextureRef fade_tex;
@@ -31,6 +34,7 @@ public:
 
 
 	ProductionCamera(){
+		scatter = 0;
 		pos = ci::vec2(0);
 		buf_pos = ci::vec2(0);
 		camera_size = ci::vec2(0);
@@ -53,8 +57,6 @@ public:
 		return ci::vec3(pos.x,pos.y,camera_z);
 	}
 	void setCameraZ(const int& value) {
-		if (9000 < (camera_z + value)) return;
-		if (500 > (camera_z + value)) return;
 		camera_z += value;
 	}
 	void followingCamera(ci::vec2* pos, const ci::vec2& size) {

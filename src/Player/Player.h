@@ -9,13 +9,16 @@
 #include "../HPGauge/HPGauge.h"
 #include "../Animation/Animation.h"
 #include "../Data/Data.h"
+#include "../Animation/Production/Spawn/PlayerSpawn.h"
+#include "../Animation/Production/Dead/Dead.h"
+#include "../Enemy/Boss/Boss.h"
 namespace wall {
 	enum WINDOW_SIZE {
 		WIDTH = 3000,
 	    HEIGHT = 2000
 	};
 }
-
+ 
 static void EnemyCollision(ci::vec2& pos1, ci::vec2 size1, const float& r1,
 	ci::vec2 pos2, ci::vec2 size2, const float& r2) {
 	ci::vec2 center1 = ci::vec2(pos1.x + size1.x/2, pos1.y + size1.y/2);
@@ -74,7 +77,7 @@ public:
 	}
 
 
-	void attack(std::list<std::shared_ptr<ObjectBase>>& objects);
+	void attack(std::list<std::shared_ptr<ObjectBase>>& objects, std::list<std::shared_ptr<Boss>>& boss);
 	void attackSpeed(const float& delta_time);
 	void move(const float& delta_time);
 
@@ -88,4 +91,5 @@ public:
 	void setup();
 	void update(const float& delta_time);
 	void draw();
+	void isDead();
 };

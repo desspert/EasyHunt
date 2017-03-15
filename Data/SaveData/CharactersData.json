@@ -1,0 +1,106 @@
+{
+  "Star1": {
+    "Goblin": {
+      "Rare": 1,
+      "Size" : 100,
+      "Hp": 1000,
+      "Attack": 300,
+      "Speed": 0,
+      "Range": 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Goblin",
+      "TexturePath": "Characters/Star1/o03800380main1305.png"
+    },
+    
+     "Kanemaziro": {
+      "Rare": 1,
+      "Size" : 100,
+      "Hp": 1000,
+      "Attack": 300,
+      "Speed": 0,
+      "Range": 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Kanemaziro",
+      "TexturePath": "Characters/Star1/arumajiro.png"
+    },
+
+      "Wani": {
+      "Rare": 1,
+      "Size" : 100,
+      "Hp": 1000,
+      "Attack": 300,
+      "Speed": 0,
+      "Range": 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Wani",
+      "TexturePath": "Characters/Star1/monstr01.png"
+    },
+
+    
+
+    
+
+      "Golem": {
+      "Rare": 1,
+      "Size" : 100,
+      "Hp": 1000,
+      "Attack": 300,
+      "Speed": 0,
+      "Range": 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Golem",
+      "TexturePath": "Characters/Star1/20121017202941bd7.png"
+    }
+  },
+  
+  "Star2": {
+    
+     "Monta": {
+      "Rare": 2,
+      "Size" : 100,
+      "Hp" : 1000 ,
+      "Attack": 300,
+      "Speed": 0,
+      "Range" : 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Monta",
+      "TexturePath": "Characters/Star2/slimecolor.png"
+    }, 
+    
+       
+     "Witch": {
+      "Rare": 1,
+      "Size" : 100,
+      "Hp": 1000,
+      "Attack": 300,
+      "Speed": 0,
+      "Range": 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Witch",
+      "TexturePath": "Characters/Star2/L_mons4.png"
+    }
+  
+  
+  },
+	"Star3": {
+    "Warrior": {
+      "Rare": 3,
+      "Size" : 100,
+      "Hp" : 1000 ,
+      "Attack": 300,
+      "Speed": 0,
+      "Range" : 200,
+      "AttackSpeed": 2,
+      "AttackType": "Blade",
+      "Name": "Warrior",
+      "TexturePath": "Characters/Star3/murayakimen02-mv.png"
+    }
+    
+  }
+}

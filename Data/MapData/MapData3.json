@@ -1,0 +1,21 @@
+{
+  "Players": {
+    "Player1": {
+      "Pos": [ 700, 500 ]
+    }
+  },
+  "Enemys": {
+    
+    "敵2": {
+      "Pos": [ 1500, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 2,
+      "Range": 300,
+      "Texture": "Enemy/20121017202941bd7.png"
+    }
+  }
+
+}

@@ -15,14 +15,57 @@ static bool CollisionCircleToCircle(const ci::vec2& center1, const float& r1, co
 	return false;
 }
 
-static ci::vec2 returnCircleToCircle(const ci::vec2& center1, const ci::vec2& center2, const float& r2) {
+static float findDistance(float x1, float y1, float x2, float y2) {
+	float a = std::abs(x1 - x2);
+	float b = std::abs(y1 - y2);
+
+	float c = std::sqrt((a * a) + (b * b));
+	return c;
+}
+static bool RectToCircle(ci::vec2 pos1, ci::vec2 size1, float angle, ci::vec2 circle, float raduis) {
+	ci::vec2 center1 = ci::vec2(pos1.x + size1.x / 2, pos1.y + size1.y / 2);
+	// 矩形０度の時の座標に円の角度を直す。
+	float cx = std::cos(angle) * (circle.x - center1.x) -
+		std::sin(angle) * (circle.y - center1.y) + center1.x;
+	float cy = std::sin(angle) * (circle.x - center1.x) +
+		std::cos(angle) * (circle.y - center1.y) + center1.y;
+
+	// 上の円の中心点から矩形の１番近い座標
+	float x, y;
+
+	// １番近いx座標を求める
+	if (cx < pos1.x)
+		x = pos1.x;
+	else if (cx > pos1.x + size1.x)
+		x = pos1.x + size1.x;
+	else
+		x = cx;
+
+	// １番近いy座標を求める
+	if (cy < pos1.y)
+		y = pos1.y;
+	else if (cy > pos1.y + size1.y)
+		y = pos1.y + size1.y;
+	else
+		y = cy;
+
+
+
+	float distance = findDistance(cx, cy, x, y);
+	if (distance < raduis)
+		return true; // 衝突
+	else
+		return false;
+}
+
+static ci::vec2 returnCircleToCircle(const ci::vec2& center1, const ci::vec2& center2) {
 	ci::vec2 buf =  center2 - center1;
 	
 	return buf;
 }
 class ObjectBase;
 using object_coroutine = boost::coroutines::coroutine<ObjectBase*>;
-
+ 
 class ObjectBase {
 protected:
 	HPGauge gauge;
@@ -128,7 +171,7 @@ public:
 			time = time;
 		}
 	} 
-	static void objectCoroutine(object_coroutine::pull_type & yield) {
+	static  void objectCoroutine(object_coroutine::pull_type & yield) {
 		{
 			while (true)
 			{

@@ -30,35 +30,29 @@ private:
 	Character selected_character;
 	int clear_stage;
 	int have_coin;
+	
 public:
+	Json::Value root_type;
 	std::map<std::string, Character> characters;
-	PlayerData() {
-		Json::Value root_type;
-		Json::Reader reader;
-		if (reader.parse(loadString("SaveData/PlayerData.json"), root_type)) {
-			for (auto it = root_type["Characters"].begin(); it != root_type["Characters"].end(); it++) {
-				characters[(*it)["Name"].asString()].rare = (*it)["Rare"].asInt();
-				characters[(*it)["Name"].asString()].size = (*it)["Size"].asInt();
-				characters[(*it)["Name"].asString()].hp = (*it)["Hp"].asInt();
-				characters[(*it)["Name"].asString()].attack = (*it)["Attack"].asInt();
-				characters[(*it)["Name"].asString()].speed = (*it)["Speed"].asFloat();
-				characters[(*it)["Name"].asString()].range = (*it)["Range"].asInt();
-				characters[(*it)["Name"].asString()].attack_speed = (*it)["AttackSpeed"].asFloat();
-				characters[(*it)["Name"].asString()].type = (*it)["AttackType"].asString();
-				characters[(*it)["Name"].asString()].name = (*it)["Name"].asString();
-				characters[(*it)["Name"].asString()].texture_path = (*it)["TexturePath"].asString();
-				selected_character = characters[(*it)["Name"].asString()];
-			}
-			have_coin = root_type["Coins"].asInt();
-		}
-	}
+	PlayerData();
+	void Save();
+	void Load();
 	void selectMap(const int& map) {
 		selected_map = map;
 	}
 	void clearStage(const int& map) {
 		clear_stage = map;
 	}
-
+	void addCoin(const int& coin) {
+		have_coin += coin;
+		root_type["Coins"] = have_coin;
+		Save();
+	}
+	void useCoin(const int& coin) {
+		have_coin -= coin;
+		root_type["Coins"] = have_coin;
+		Save();
+	}
 	const int& getSelectedMap() {
 		return selected_map;
 	}

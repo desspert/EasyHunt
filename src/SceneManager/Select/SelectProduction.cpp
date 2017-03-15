@@ -36,7 +36,7 @@ struct Select::_coroutine
 				yield().get()->is_start = false;
 				break;
 			}
-
+			//’ÊíŽž
 			while (true)
 			{
 				yield();
@@ -67,7 +67,7 @@ struct Select::_coroutine
 					break;
 				}
 			}
-
+			//ƒKƒVƒƒ‰‰o
 			while (yield().get()->gasya_production)
 			{
 				for (int i = 0; i < yield().get()->c_info.size(); i++)
@@ -113,7 +113,7 @@ struct Select::_coroutine
 			std::mt19937 mt(rd());
 			std::uniform_real_distribution<float> rand(0, 100);
 			parent.releaseChara = rand(mt);
-
+			PLAYERDATA.useCoin(5);
 			return;
 		}));
 		c_info.push_back(CoroutineInfo(1, [&]() {
@@ -134,7 +134,7 @@ struct Select::_coroutine
 		}));
 		c_info.push_back(CoroutineInfo(1, [&]() {
 			ci::app::console() << static_cast<int>(parent.releaseChara) << std::endl;
-			if (static_cast<int>(parent.releaseChara) <= 30) {
+			if (static_cast<int>(parent.releaseChara) < 30) {
 				parent.ui.ui_data["GasyaBall"]->setColor(0.3f,0.3f,1,1);
 				parent.ui.ui_data["GasyaBall"]->setActive(true);
 				ANIMATION.animationAdd<GasyaSpawn>(ci::vec2(1300, 500), 1000);
@@ -251,7 +251,6 @@ struct Select::_coroutine
 			parent.ui.ui_data["Star2"]->setActive(false);
 			parent.ui.ui_data["Star1"]->setActive(false);
 			parent.ui.ui_data["GasyaBall"]->setActive(false);
-			parent.pause = false;
 			parent.gasya_production = false;
 			return;
 		}));
@@ -265,7 +264,10 @@ struct Select::_coroutine
 			c_Easing::apply(CAMERA.fade_out.a, 0, EasingFunction::Linear, 90);
 			return;
 		}));
-		
+		c_info.push_back(CoroutineInfo(1, [this]() {
+			parent.pause = false;
+			return;
+		}));
 	}
 	void end()
 	{
@@ -296,6 +298,7 @@ struct Select::_coroutine
 				for (int i = 0; i < selected_chara; i++) {
 					it++;
 				}
+				saveChara(it);
 				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
 				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
 
@@ -314,6 +317,7 @@ struct Select::_coroutine
 				for (int i = 0; i < selected_chara; i++) {
 					it++;
 				}
+				saveChara(it);
 				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
 				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
 			}
@@ -328,11 +332,18 @@ struct Select::_coroutine
 				for (int i = 0; i < selected_chara; i++) {
 					it++;
 				}
+				saveChara(it);
 				auto img_gasya = ci::loadImage(ci::app::loadAsset((*it)["TexturePath"].asString()));
 				parent.ui.textures["GasyaChara"] = ci::gl::Texture2d::create(img_gasya);
 			}
 		}
 	}
+
+	void saveChara(Json::ValueIterator& chara) {
+		PLAYERDATA.root_type["Characters"][std::to_string(PLAYERDATA.root_type["Characters"].size()+1)] = (*chara);
+		PLAYERDATA.Save();
+	}
+
 	void shift() {
 		SE.allStop();
 		SE.allCrear();

@@ -2,13 +2,25 @@
 
 
 
-void Player::attack(std::list<std::shared_ptr<ObjectBase>>& objects)
+void Player::attack(std::list<std::shared_ptr<ObjectBase>>& objects, std::list<std::shared_ptr<Boss>>& boss)
 {
+	for (auto& it : boss) {
+		EnemyCollision(pos, size, radius, it->getPos(), it->getSize(), it->getRradius());
+		if (CollisionCircleToCircle(pos, radius*status.range / 100, it->getPPos(), it->getRradius())) {
+			if (is_attack) {
+				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos()),
+					it,
+					status.attack);
+				break;
+			}
+		}
+	}
+
 	for (auto& it : objects) {
 		EnemyCollision(pos, size, radius, it->getPos(), it->getSize(), it->getRradius());
 		if (CollisionCircleToCircle(pos, radius*status.range/100, it->getPPos(), it->getRradius())) {
 			if (is_attack) {
-				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos(), it->getRradius()),
+				ANIMATION.animationAdd<Blade>(pos + returnCircleToCircle(pos, it->getPPos()),
 				it,
 				status.attack);
 				break;
@@ -84,19 +96,29 @@ void Player::setup()
 	
 	img_range = ci::loadImage(ci::app::loadAsset("Player/Player.png"));
 	ball = ci::gl::Texture2d::create(img_range);
+
+	color.a = 0;
+	c_info.push_back(CoroutineInfo(0, [this]() {
+		ANIMATION.animationAdd<PlayerSpawn>(this->getPos(), radius);
+		return;
+	}));
+	c_info.push_back(CoroutineInfo(0.5f, [this]() {
+		c_Easing::apply(color.a, 1, EasingFunction::ElasticOut, 30);
+		return;
+	}));
 }
 
 void Player::update(const float& delta_time)
 {
+	ObjectBase::update(delta_time);
 	attackSpeed(delta_time);
 	move(delta_time);
+	isDead();
 }
 
 void Player::draw()
 {
 	
-
-
 	ci::gl::pushModelMatrix();
 	ci::gl::translate(pos);
 	ci::gl::rotate(rotate);
@@ -148,11 +170,18 @@ void Player::draw()
 	ci::gl::color(1, 1, 1, 1);
 	TEX.get("player")->unbind();
 	ci::gl::popModelMatrix();
+}
 
-
-
-
-	
-
-
+void Player::isDead()
+{
+	if (!(hp < 0)) return;
+	dead_count++;
+	if (dead_count == 1) {
+		c_Easing::apply(size.x, 0, EasingFunction::BounceIn, 30);
+		c_Easing::apply(size.y, 0, EasingFunction::BounceIn, 30);
+	}
+	if (dead_count == 30) {
+		ANIMATION.animationAdd<Dead>(this->getCenter(), radius);
+		is_active = false;
+	}
 }

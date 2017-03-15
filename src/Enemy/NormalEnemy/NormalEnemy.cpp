@@ -22,9 +22,13 @@ void NormalEnemy::draw()
 
 void NormalEnemy::attackPlayer(std::shared_ptr<Player>& player)
 {
+	if (CollisionCircleToCircle(pos, range * 2, player->getPos(), player->getRradius())) {
+		pos.x += (player->getPos().x - pos.x)*0.01f;
+		pos.y += (player->getPos().y - pos.y)*0.01f;
+	}
 	if (CollisionCircleToCircle(pos, range, player->getPos(), player->getRradius())) {
 		if (is_attack) {
-			ANIMATION.animationAdd<Scratch>(pos + returnCircleToCircle(pos, player->getPPos(), player->getRradius()),
+			ANIMATION.animationAdd<Scratch>(pos + returnCircleToCircle(pos, player->getPPos()),
 				player,
 				attack_point,
 				range);

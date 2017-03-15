@@ -4,7 +4,6 @@
 #include <memory>
 #include <functional>
 
-
 #define ANIMATION Animation::get()
 class Animation {
 private:

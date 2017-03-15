@@ -4,6 +4,8 @@
 
 void ProductionCamera::shakeCamera(const float & scatter, const float & seconds)
 {
+	this->scatter = scatter;
+	this->seconds = seconds;
 }
 
 void ProductionCamera::setup(){
@@ -17,9 +19,20 @@ void ProductionCamera::setup(){
 }
 
 void ProductionCamera::update(const float& delta_time) {
+	seconds -= delta_time;
 	buf_pos = ci::vec2((*reference_pos)->x, (*reference_pos)->y) - pos;
 	buf_pos *= 0.1f;
 	pos += buf_pos;
+	if (seconds > 0) {
+		std::random_device rd;
+		std::mt19937 mt(rd());
+		std::uniform_real_distribution<float> random_x(-scatter, scatter);
+		std::uniform_real_distribution<float> random_y(-scatter, scatter);
+		float buf_x = random_x(mt);
+		float buf_y = random_y(mt);
+		pos.x += buf_x;
+		pos.y += buf_y;
+	}
 	camera.lookAt(ci::vec3(
 		pos.x + camera_size.x / 2,
 		pos.y + camera_size.y/2,camera_z),

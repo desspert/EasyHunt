@@ -10,7 +10,10 @@ Select::Select() : _m(std::make_shared<_coroutine>(*this))
 	CAMERA.followingCamera(&camera_pos, ci::vec2(select_::WINDOW_WIDTH, select_::WINDOW_HEIGHT));
 	SE.registerFilePlayerNode("SelectBGM", "Music/kikaikoujou.mp3");
 	SE.registerBufferPlayerNode("Select", "SE/decide2.wav");
+	SE.registerBufferPlayerNode("Back", "SE/highspeed-movement1.mp3");
+	SE.registerBufferPlayerNode("GasyaSelect", "SE/decision4.mp3");
 	TEX.set("Gasya", "Characters/kouhakuhikari.png");
+	TEX.set("Tap", "UI/UITexture/Select/pipo-btleffect038.png");
 	TEX.set("GasyaSpawn", "Characters/GasyaSpawn.png");
 	TEX.set("GasyaEnd", "Characters/gasya_end.png");
 }
@@ -24,8 +27,8 @@ void Select::setup()
 void Select::update(const float & delta_time)
 {
 	ANIMATION.update(delta_time);
-	_m->update(delta_time);
 	ui.update(delta_time);
+	_m->update(delta_time);
 }
 
 void Select::draw()

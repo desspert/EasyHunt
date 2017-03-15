@@ -30,6 +30,7 @@ public:
 	const bool& isActive() {
 		return is_active;
 	}
+	
 	virtual void update(const float& delta_time) = 0;
 	virtual void draw() = 0;
 };

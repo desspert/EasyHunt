@@ -1,0 +1,18 @@
+{
+   "Characters" : {
+      
+      "a" : {
+         "Attack" : 1500,
+         "AttackSpeed" : 0.20000000000000001,
+         "AttackType" : "Blade",
+         "Hp" : 1000,
+         "Name" : "Warrior",
+         "Range" : 300,
+         "Rare" : 3,
+         "Size" : 100,
+         "Speed" : 200,
+         "TexturePath" : "Characters/Star3/the-trump-minister02-mv.png"
+      }
+   },
+   "Coins" : 300
+}

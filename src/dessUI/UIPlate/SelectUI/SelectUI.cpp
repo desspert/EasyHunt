@@ -7,9 +7,8 @@ void SelectUI::setup(const dess::SceneName & name)
 	ui_data["GasyaRoom"]->setActive(true);
 	ui_data["Battle"]->setActive(true);
 	ui_data["Gasya"]->setActive(true);
-	ui_data["Option"]->setActive(true);
 	ui_data["Status"]->setActive(true);
-	ui_data["test"]->setActive(true);
+	ui_data["HaveCoin"]->setActive(true);
 	ui_data["Coin"]->setActive(true);
 	for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
 		ui_data[(*it)]->setActive(true);
@@ -18,6 +17,29 @@ void SelectUI::setup(const dess::SceneName & name)
 
 void SelectUI::update(const float& delta_time)
 {
+	
+	{
+	ci::TextLayout font_buf;
+	font_buf.setColor(ci::ColorA(
+		ui_data["HaveCoin"]->fontGetColorR(),
+		ui_data["HaveCoin"]->fontGetColorG(),
+		ui_data["HaveCoin"]->fontGetColorB(),
+		ui_data["HaveCoin"]->fontGetColorA()));
+	font_buf.setFont(TEX.getFont());
+	font_buf.addLine(std::to_string(PLAYERDATA.getHaveCoins()));
+	font["HaveCoin"] = font_buf;
+	}
+	{
+		ci::TextLayout font_buf;
+		font_buf.setColor(ci::ColorA(
+			ui_data["GasyaHaveCoin"]->fontGetColorR(),
+			ui_data["GasyaHaveCoin"]->fontGetColorG(),
+			ui_data["GasyaHaveCoin"]->fontGetColorB(),
+			ui_data["GasyaHaveCoin"]->fontGetColorA()));
+		font_buf.setFont(TEX.getFont());
+		font_buf.addLine(std::to_string(PLAYERDATA.getHaveCoins()) + "/5");
+		font["GasyaHaveCoin"] = font_buf;
+	}
 	UIPlate::update(delta_time);
 	for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
 		ui_data[(*it)]->update();
@@ -29,7 +51,10 @@ void SelectUI::draw()
 {
 	scroll_pos.y *= 0.95f;
 
-
+	if (ui_data["Solo"]->getActive() ||
+		ui_data["Multi"]->getActive()) {
+		scroll_pos = ci::vec2(0, 0);
+	}
 	if (ui_data[ui_scrolls_key.back()]->getPosY() + scroll_pos.y > 750 &&
 		ui_data[ui_scrolls_key[0]]->getPosY() + scroll_pos.y < 150) {
 		for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
@@ -135,6 +160,7 @@ void SelectUI::draw()
 void SelectUI::mouseDown(ci::app::MouseEvent event)
 {
 	move_pos = event.getPos();
+	ANIMATION.animationAdd<Tap>(event.getPos(), 100);
 }
 
 void SelectUI::mouseDrag(ci::app::MouseEvent event)
@@ -159,6 +185,8 @@ void SelectUI::mouseUp(ci::app::MouseEvent event)
 					c_Easing::apply(scroll_scales[(*it)], 1, EasingFunction::CircInOut, 20);
 					SE.find("Select")->start();
 					PLAYERDATA.selectMap(selected_map);
+					ui_data["Fade"]->setActive(true);
+					ui_data["Back"]->setActive(true);
 					ui_data["Solo"]->setActive(true);
 					ui_data["Multi"]->setActive(true);
 				}
@@ -167,15 +195,22 @@ void SelectUI::mouseUp(ci::app::MouseEvent event)
 	}
 
 
-	//オプション中
-	if (ui_data["Option"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
-		sceneOption();
-	}
+	////オプション中
+	//if (ui_data["Option"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
+	//	sceneOption();
+	//}
 	//クエスト中
 	if (ui_data["BackGasya"]->isEasingEnd()) {
 		if (!ui_data["BackGasya"]->getActive()) {
 			if (ui_data["Gasya"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
 				sceneGasya();
+			}
+			if (ui_data["Back"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
+				SE.find("Back")->start();
+				ui_data["Fade"]->setActive(false);
+				ui_data["Back"]->setActive(false);
+				ui_data["Solo"]->setActive(false);
+				ui_data["Multi"]->setActive(false);
 			}
 			if (ui_data["Multi"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
 
@@ -198,12 +233,13 @@ void SelectUI::mouseUp(ci::app::MouseEvent event)
 			if (ui_data["Battle"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
 				sceneBattle();
 			}
-			if (ui_data["GasyaButton"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
-				SE.find("Select")->start();
-				is_gasya = true;
-				**pause = true;
+			if (PLAYERDATA.getHaveCoins() >= 5) {
+				if (ui_data["GasyaButton"]->collisionToUI(des::Vec2f(event.getPos().x, event.getPos().y))) {
+					SE.find("GasyaSelect")->start();
+					is_gasya = true;
+					**pause = true;
+				}
 			}
-
 		}
 	}
 
@@ -255,8 +291,6 @@ void SelectUI::touchesEnded(ci::app::TouchEvent event)
 			is_end = true;
 			return;
 		}
-
-
 	}
 
 
@@ -269,9 +303,7 @@ void SelectUI::touchesEnded(ci::app::TouchEvent event)
 			is_gasya = true;
 			**pause = true;
 		}
-
 	}
-
 }
 
 
@@ -281,6 +313,9 @@ void SelectUI::sceneBattle()
 	for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
 		ui_data[(*it)]->setActive(true);
 	}
+	ui_data["GasyaCoin"]->setActive(false);
+	ui_data["GasyaHaveCoin"]->setActive(false);
+	ui_data["BackGasya"]->setActive(false);
 	ui_data["GasyaButton"]->setActive(false);
 	ui_data["BackGasya"]->setActive(false);
 	ui_data["BackBattle"]->setActive(true);
@@ -290,10 +325,14 @@ void SelectUI::sceneBattle()
 void SelectUI::sceneGasya()
 {
 	ui_data["GasyaButton"]->setActive(true);
+	ui_data["GasyaCoin"]->setActive(true);
+	ui_data["GasyaHaveCoin"]->setActive(true);
 	ui_data["BackGasya"]->setActive(true);
 	ui_data["BackBattle"]->setActive(false);
+	ui_data["Back"]->setActive(false);
 	ui_data["Solo"]->setActive(false);
 	ui_data["Multi"]->setActive(false);
+	ui_data["Fade"]->setActive(false);
 	for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
 		ui_data[(*it)]->setActive(false);
 	}
@@ -302,15 +341,18 @@ void SelectUI::sceneGasya()
 
 void SelectUI::sceneOption()
 {
-	ui_data["GasyaButton"]->setActive(false);
-	ui_data["BackGasya"]->setActive(false);
-	ui_data["BackBattle"]->setActive(false);
-	ui_data["Solo"]->setActive(false);
-	ui_data["Multi"]->setActive(false);
-	for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
-		ui_data[(*it)]->setActive(false);
-	}
-	SE.find("Select")->start();
+	//ui_data["Back"]->setActive(false);
+	//ui_data["GasyaButton"]->setActive(false);
+	//ui_data["BackGasya"]->setActive(false);
+	//ui_data["BackBattle"]->setActive(false);
+	//ui_data["Solo"]->setActive(false);
+	//ui_data["Multi"]->setActive(false);
+	//ui_data["GasyaCoin"]->setActive(false);
+	//ui_data["GasyaHaveCoin"]->setActive(false);
+	//for (auto it = ui_scrolls_key.begin(); it != ui_scrolls_key.end(); it++) {
+	//	ui_data[(*it)]->setActive(false);
+	//}
+	//SE.find("Select")->start();
 }
 
 void SelectUI::multi()

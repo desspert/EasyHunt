@@ -1,0 +1,63 @@
+{
+  "Players": {
+    "Player1": {
+      "Pos": [ 700, 500 ]
+    }
+  },
+  "Enemys": {
+    "敵1": {
+      "Pos": [ 100, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 1,
+      "Range": 500,
+      "Texture": "Enemy/20121017202941bd7.png"
+    },
+    "敵2": {
+      "Pos": [ 700, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 1,
+      "Range": 500,
+      "Texture": "Enemy/20121017202941bd7.png"
+    },
+     "敵3": {
+      "Pos": [ 1300, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 1,
+      "Range": 500,
+      "Texture": "Enemy/20121017202941bd7.png"
+    },
+
+    "敵4": {
+      "Pos": [ 2000, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 1,
+      "Range": 500,
+      "Texture": "Enemy/20121017202941bd7.png"
+    },
+
+     "敵5": {
+      "Pos": [ 2600, 1200 ],
+      "Size": 300,
+      "EnemyType": 1,
+      "HP": 30000,
+      "Attack": 156,
+      "AttackSpeed": 1,
+      "Range": 500,
+      "Texture": "Enemy/20121017202941bd7.png"
+    }
+  
+  }
+
+}

@@ -1,0 +1,1162 @@
+{
+  "Title": {
+    "わっふぉい": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/enemy.png",
+      "Pos": [ 300, 800 ],
+      "Size": [ 200,200],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+       
+        
+      ],
+      
+      "EaseOut": [
+       { "UIState": "Pos","Change": [200,200],"EasingType": "ExpoIn","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+       { "UIState": "Pos","Change": [400,700],"EasingType": "BounceIn","Frame": 30},
+      { "UIState": "Pos","Change": [400,400],"EasingType": "ExpoIn","Frame": 30}
+      ],
+      "EaseCollision": [
+        { "UIState": "Pos","Change": [400,700],"EasingType": "ExpoIn","Frame": 30},
+      { "UIState": "Size","Change": [400,400],"EasingType": "ExpoIn","Frame": 30}
+      ]
+    },
+    
+     "背景": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Title/background.png",
+      "Pos": [ 0, 0 ],
+      "Size": [ 300,200],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [],
+
+      "EaseOut": [
+         { "UIState": "Pos","Change": [200,200],"EasingType": "ExpoIn","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+         { "UIState": "Pos","Change": [200,200],"EasingType": "ExpoIn","Frame": 30},
+      { "UIState": "Size","Change": [400,400],"EasingType": "ExpoIn","Frame": 30},
+       { "UIState": "Pos","Change": [0,0],"EasingType": "ExpoIn","Frame": 30},
+      { "UIState": "Size","Change": [300,300],"EasingType": "ExpoIn","Frame": 30}
+      ],
+      "EaseCollision": []
+    },
+    "画面下": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Title/mw.png",
+      "Pos": [ 320,250],
+      "Size": [ 640,500],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [],
+      
+      "EaseOut": [],
+
+      "EaseUpdate": [],
+      "EaseCollision": []
+    },
+    "フォント": {
+     "UIType": "IncrementTimeUI",
+      "FontPath": "UI/UITexture/Font/HGRSGU.TTC",
+      "Pos": [ 230, 250 ],
+      "Color" :  [1,1,1,1],
+      "Size": 50,
+      
+     
+      
+      "EaseIn": [ ],
+      "EaseOut": [ ],
+       "EaseUpdate": []
+    },
+  "アニメーション": {
+      "UIType": "AnimationUI",
+      "TexturePath": "push_enter.png",
+      "Pos": [ 300,200],
+      "Size": [ 200,200],
+      "Color" :  [1,1,1,1],
+      
+      "Seets": [ 10,1],
+      
+      "CutSize": [409.6,512 ],
+     
+      "Between": 0.2,
+     
+      "Looping": false,
+      
+      "EaseIn": [],
+      
+      "EaseOut": [
+       { "UIState": "Pos","Change": [200,200],"EasingType": "ExpoIn","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+       { "UIState": "Pos","Change": [400,700],"EasingType": "BounceIn","Frame": 30},
+      { "UIState": "Pos","Change": [400,400],"EasingType": "ExpoIn","Frame": 30}
+      ]
+     
+    }
+  },
+
+
+  "Select": {
+    "BackBattle": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/kaidou0331_800.jpg",
+      "Pos": [ -100, -100 ],
+      "Size": [ 1000,1200],
+      "Color" :  [0.7,0.7,0.7,1],
+      "EaseIn": [
+       
+         { "UIState": "Color","Change": [0.7,0.7,0.7,1],"EasingType": "Liner","Frame": 15}
+      ],
+      
+      "EaseOut": [
+      { "UIState": "Color","Change": [0.7,0.7,0.7,0],"EasingType": "Liner","Frame": 15}
+      ],
+
+      "EaseUpdate": [
+       
+      ],
+      "EaseCollision": [
+        { "UIState": "Pos","Change": [400,700],"EasingType": "ExpoIn","Frame": 30},
+      { "UIState": "Size","Change": [400,400],"EasingType": "ExpoIn","Frame": 30}
+      ]
+    },
+    "GasyaRoom": {
+      "UIType": "CollisionUI",
+      "TexturePath": "Characters/001.jpg",
+      "Pos": [ 870, -200 ],
+      "Size": [ 900,1200],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+      ],
+      
+      "EaseOut": [
+      ],
+
+      "EaseUpdate": [
+       
+      ],
+      "EaseCollision": [
+      ]
+    },
+     "Fade": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/GameChange.png",
+      "Pos": [ -100, -100 ],
+      "Size": [ 2000, 2000 ],
+      "Color" :  [0,0,0,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [0,0,0,0.4],"EasingType": "Liner","Frame": 30}
+
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [0,0,0,0],"EasingType": "Liner","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+     "Battle": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Battle.png",
+      "Pos": [ 5, 860 ],
+      "Size": [ 310, 100 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+       
+      
+      ],
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 5, 840 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 310, 120 ],"EasingType": "BackOut","Frame": 10},
+      { "UIState": "Pos","Change": [ 5, 860 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 310, 100 ],"EasingType": "BackOut","Frame": 10}
+      ]
+    },
+    
+      "Back": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/back.png",
+      "Pos": [ -600,200 ],
+      "Size": [ 200, 100 ],
+      "Color" :  [1,1,1,1],
+     
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 50, 200 ],"EasingType": "CircOut","Frame": 30}
+      ],
+
+      "EaseOut": [
+       { "UIState": "Pos","Change": [ -600,200 ],"EasingType": "BackOut","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+
+
+      "Solo": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Solo.png",
+      "Pos": [ 150, 450 ],
+      "Size": [ 0, 0 ],
+      "Color" :  [1,1,1,0.3],
+     
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 50, 350 ],"EasingType": "BackOut","Frame": 40},
+       { "UIState": "Size","Change": [ 250, 250 ],"EasingType": "BackOut","Frame": 40},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 40}
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 150, 450 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 0, 0 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+        { "UIState": "Pos","Change": [ 25, 325 ],"EasingType": "ExpoOut","Frame": 20},
+       { "UIState": "Size","Change": [ 300, 300 ],"EasingType": "ExpoOut","Frame": 20},
+      { "UIState": "Color","Change": [1,1,1,0],"EasingType": "ExpoOut","Frame": 40}
+      ]
+    },
+      
+      "Multi": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Multi.png",
+      "Pos": [ 450, 450 ],
+      "Size": [ 0, 0 ],
+      "Color" :  [1,1,1,0.3],
+     
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 350, 350 ],"EasingType": "BackOut","Frame": 40},
+       { "UIState": "Size","Change": [ 250, 250 ],"EasingType": "BackOut","Frame": 40},
+        { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 40}
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 450, 400 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 0, 0 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 325, 325 ],"EasingType": "ExpoOut","Frame": 20},
+       { "UIState": "Size","Change": [ 300, 300 ],"EasingType": "ExpoOut","Frame": 20},
+      { "UIState": "Color","Change": [1,1,1,0],"EasingType": "ExpoOut","Frame": 40}
+      ]
+    },
+     
+       "GasyaButton": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/GasyaButton.png",
+     "Pos": [ 310, 650 ],
+      "Size": [ 0, 0 ],
+      "Color" :  [1,1,1,0.3],
+     
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 200, 600 ],"EasingType": "BounceOut","Frame": 30},
+       { "UIState": "Size","Change": [ 250, 100 ],"EasingType": "BounceOut","Frame": 30},
+        { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BounceOut","Frame": 30}
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 310, 650 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 0, 0 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+        
+      ],
+      
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 150, 575 ],"EasingType": "ExpoOut","Frame": 10},
+       { "UIState": "Size","Change": [ 350, 150 ],"EasingType": "ExpoOut","Frame": 10},
+      { "UIState": "Pos","Change": [ 150, 575 ],"EasingType": "ExpoOut","Frame": 20},
+       { "UIState": "Size","Change": [ 350, 150 ],"EasingType": "ExpoOut","Frame": 20},
+       { "UIState": "Pos","Change": [ 200, 600 ],"EasingType": "ExpoOut","Frame": 10},
+       { "UIState": "Size","Change": [ 250, 100 ],"EasingType": "ExpoOut","Frame": 10}
+      ]
+    },
+
+     "Gasya": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Gasya.png",
+      "Pos": [ 320, 860 ],
+      "Size": [ 315, 100 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 320, 840 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 315, 120 ],"EasingType": "BackOut","Frame": 10},
+      { "UIState": "Pos","Change": [ 320, 860 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 315, 100 ],"EasingType": "BackOut","Frame": 10}
+      ]
+    },
+    "Option": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Option.png",
+      "Pos": [ 424, 860 ],
+      "Size": [ 208, 100 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 424, 840 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 208, 120 ],"EasingType": "BackOut","Frame": 10},
+      { "UIState": "Pos","Change": [ 424, 860 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 208, 100 ],"EasingType": "BackOut","Frame": 10}
+      ]
+    },
+    
+    "Status": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/GasyaButton.png",
+      "Pos": [ 0, 0 ],
+      "Size": [ 640, 140 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+    
+    
+    "BackGasya": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/img_01.jpg",
+      "Pos": [ -225, 100 ],
+      "Size": [ 1100, 900 ],
+      "Color": [0.7,0.7,0.7,0],
+      "EaseIn": [
+        {
+          "UIState": "Color",
+          "Change": [0.7,0.7,0.7,0],
+          "EasingType": "Liner",
+          "Frame": 1
+        },
+        {
+          "UIState": "Color",
+          "Change": [0.7,0.7,0.7,1],
+          "EasingType": "Liner",
+          "Frame": 15
+        }
+
+      ],
+
+      "EaseOut": [
+        {
+          "UIState": "Color",
+          "Change": [0.7,0.7,0.7,0],
+          "EasingType": "Liner",
+          "Frame": 15
+        }
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+       
+      ]
+    },
+     "GasyaBall": {
+      "UIType": "CollisionUI",
+      "TexturePath": "Characters/Player.png",
+      "Pos": [ 1225, 400 ],
+      "Size": [ 200, 200 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+        { "UIState": "Pos","Change": [ 1225, 450 ],"EasingType": "SineOut","Frame": 60},
+         { "UIState": "Pos","Change": [ 1225, 400 ],"EasingType": "SineOut","Frame": 60}
+      ],
+
+      "EaseOut": [
+         { "UIState": "Pos","Change": [ 1800, 900 ],"EasingType": "SineOut","Frame": 30},
+        { "UIState": "Size","Change": [ 0, 0 ],"EasingType": "SineOut","Frame": 30},
+        { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30},
+        { "UIState": "Pos","Change": [ 1225, 400 ],"EasingType": "SineOut","Frame": 1},
+        { "UIState": "Size","Change": [ 200, 200 ],"EasingType": "SineOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+        { "UIState": "Pos","Change": [ 1225, 450 ],"EasingType": "SineOut","Frame": 60},
+         { "UIState": "Pos","Change": [ 1225, 400 ],"EasingType": "SineOut","Frame": 60}
+      ],
+      "EaseCollision": [
+      ]
+    },
+     
+     "GasyaChara": {
+      "UIType": "CollisionUI",
+      "TexturePath": "Characters/Player.png",
+      "Pos": [ 1085, 100 ],
+      "Size": [ 500, 500 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+        { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1085, 200 ],"EasingType": "SineOut","Frame": 120},
+         { "UIState": "Pos","Change": [ 1085, 230 ],"EasingType": "SineOut","Frame": 60}
+      ],
+
+      "EaseOut": [
+        { "UIState": "Pos","Change": [ 1085, 300 ],"EasingType": "SineOut","Frame": 1},
+        { "UIState": "Size","Change": [ 500, 500 ],"EasingType": "SineOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+        { "UIState": "Pos","Change": [ 1085, 200 ],"EasingType": "SineOut","Frame": 60},
+         { "UIState": "Pos","Change": [ 1085, 230 ],"EasingType": "SineOut","Frame": 60}
+      ],
+      "EaseCollision": [
+      ]
+    },
+    
+     "Star1": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/star.png",
+      "Pos": [ 1050, 100 ],
+      "Size": [ 600, 600 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1285, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 100, 100 ],"EasingType": "SineOut","Frame": 30}
+
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1050, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 600, 600 ],"EasingType": "SineOut","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+     
+     "Star2": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/star.png",
+      "Pos": [ 1050, 100 ],
+      "Size": [ 600, 600 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1085, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 100, 100 ],"EasingType": "SineOut","Frame": 30}
+
+      ],
+
+      "EaseOut": [
+          { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1050, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 600, 600 ],"EasingType": "SineOut","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+
+     "Star3": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/star.png",
+      "Pos": [ 1050, 100 ],
+      "Size": [ 600, 600 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+        { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1485, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 100, 100 ],"EasingType": "SineOut","Frame": 30}
+      ],
+
+      "EaseOut": [
+          { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30}, 
+        { "UIState": "Pos","Change": [ 1050, 100 ],"EasingType": "SineOut","Frame": 30},
+         { "UIState": "Size","Change": [ 600, 600 ],"EasingType": "SineOut","Frame": 30}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+
+     
+     "Scroll1": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 150 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★",
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 100, 150 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 150 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change":[ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+       
+      ]
+    },
+
+    "Scroll2": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 300 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+     "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★",
+       "EaseIn": [
+          { "UIState": "Pos","Change": [ 100, 300 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 300 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+       
+      ]
+    },
+
+    "Scroll3": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 450 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 450 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 450 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+    
+
+     "Scroll4": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 600 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 600 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1000 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+  "Scroll5": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 750 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 750 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1800 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+    
+   "Scroll6": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 900 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 900 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1800 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+
+
+    "Scroll7": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 1050 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★★★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 1050 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1800 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+
+     "Scroll8": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 1200 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★★★★★★★★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 1200 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1800 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+  
+     "Scroll9": {
+      "UIType": "ScrollUI",
+      "TexturePath": "UI/UITexture/Select/ui_back.png",
+      "Pos": [ 2000, 1350 ],
+      "Size": [ 450, 100 ],
+      "Color" :  [1,1,1,0.3],
+      "FontPos": [ 60, 75 ],
+      "FontColor": [ 0,  0, 1, 1 ],
+      "FontScale" : 0.5,
+      "Text" : "★",
+       "EaseIn": [
+         { "UIState": "Pos","Change": [ 100, 1350 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Size","Change":  [ 450, 100 ],"EasingType": "ExpoOut","Frame": 60},
+       { "UIState": "Color","Change": [1,1,1,1],"EasingType": "BackOut","Frame": 60}
+       ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 30},
+       { "UIState": "Pos","Change": [ 2000, 1800 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Size","Change": [ 450, 100 ],"EasingType": "BackOut","Frame": 1},
+       { "UIState": "Color","Change": [1,1,1,0.3],"EasingType": "BackOut","Frame": 1}
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      
+      "EaseCollision": [
+      ]
+    },
+     
+     "Coin": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Coin.png",
+      "Pos": [ 20, 30 ],
+      "Size": [ 60, 60 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+
+   "HaveCoin": {
+     "UIType": "FontUI",
+      "FontPath": "",
+      "Pos": [130,  90 ],
+      "Color" :  [1,1,1,1],
+      "Size": 50,
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.4,
+      "Text" : "0",
+     
+      
+      "EaseIn": [ ],
+      "EaseOut": [ ],
+       "EaseUpdate": []
+    },
+  "GasyaCoin": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/Select/Coin.png",
+      "Pos": [ 210, 620 ],
+      "Size": [ 60, 60 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+
+   "GasyaHaveCoin": {
+     "UIType": "FontUI",
+      "FontPath": "",
+      "Pos":[ 325, 680 ],
+      "Color" :  [1,1,1,1],
+      "Size": 50,
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.4,
+      "Text" : "",
+     
+      
+      "EaseIn": [ ],
+      "EaseOut": [ ],
+       "EaseUpdate": []
+    }
+    
+   
+  
+  },
+
+ 
+
+
+  "GameMain": {
+     "UIBack": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/ui_back.png",
+      "Pos": [ 0, 860 ],
+      "Size": [ 640, 100 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+       { "UIState": "Pos","Change": [ 424, 840 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 208, 120 ],"EasingType": "BackOut","Frame": 10},
+      { "UIState": "Pos","Change": [ 424, 860 ],"EasingType": "BackOut","Frame": 10},
+       { "UIState": "Size","Change": [ 208, 100 ],"EasingType": "BackOut","Frame": 10}
+      ]
+    },
+   "TouchPos": {
+      "UIType": "CollisionUI",
+      "TexturePath": "Player/flash.png",
+      "Pos": [ 0, 0 ],
+      "Size": [ 200, 200 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+      "Fade": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/GameChange.png",
+      "Pos": [ -100, -100 ],
+      "Size": [ 2000, 2000 ],
+      "Color" :  [0,0,0,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [0,0,0,0.3],"EasingType": "Liner","Frame": 60}
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+     "Win": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/Clear1.png",
+      "Pos": [ 120, 400 ],
+      "Size": [ 400, 100 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+         { "UIState": "Pos","Change": [ 120, 350 ],"EasingType": "BounceOut","Frame": 10},
+         { "UIState": "Pos","Change": [ 120, 400 ],"EasingType": "ExpoOut","Frame": 50}
+      ],
+      "EaseCollision": [
+      ]
+    },
+    "Lose": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/Lose.png",
+      "Pos": [ 120, 400 ],
+      "Size":  [ 400, 100 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 60}
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+     
+      "HPGauge": {
+      "UIType": "GaugeUI",
+      "TexturePath": "UI/UITexture/GameMain/HPGauge.png",
+      "GaugeTexturePath": "UI/UITexture/GameMain/DashGauge.png",
+      "Pos": [ 75, 870 ],
+      "Size": [ 530, 40 ],
+      "Color": [ 1, 1, 1, 1 ],
+
+      "GaugePos": [ 82, 875 ],
+      "GaugeSize": [ 513, 25 ],
+
+      "EaseIn": [ ],
+      "EaseOut": [ ],
+      "EaseUpdate": [ ]
+
+    },
+    "Life": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/hart.png",
+      "Pos": [ 35, 870 ],
+      "Size": [ 35, 35 ],
+      "Color": [ 1, 1, 1, 1 ],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+        { "UIState": "Pos","Change": [ 30, 865 ],"EasingType": "ExpoOut","Frame": 1},
+         { "UIState": "Size","Change": [ 45, 45 ],"EasingType": "ExpoIn","Frame": 1},
+         { "UIState": "Pos","Change": [ 35, 870 ],"EasingType": "BounceOut","Frame": 60},
+         { "UIState": "Size","Change": [ 35, 35 ],"EasingType": "BounceOut","Frame": 60}
+      ],
+      "EaseCollision": [
+      ]
+    },
+    
+    "Scream": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/ring.png",
+      "Pos": [ 320, 480 ],
+      "Size": [ 0, 0 ],
+      "Color": [ 1, 1, 1, 0.5 ],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+        
+      ],
+
+      "EaseUpdate": [
+         { "UIState": "Pos","Change": [ 0,  150],"EasingType": "ExpoOut","Frame": 15},
+         { "UIState": "Size","Change": [ 640, 640 ],"EasingType": "ExpoOut","Frame": 15},
+         { "UIState": "Pos","Change": [ 320, 480 ],"EasingType": "BounceOut","Frame": 1},
+         { "UIState": "Size","Change": [ 0, 0 ],"EasingType": "BounceOut","Frame": 1}
+      ],
+      "EaseCollision": [
+      ]
+    },
+    
+    "Coin": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/Coin.png",
+      "Pos": [ 35, 910 ],
+      "Size": [ 35, 35 ],
+      "Color" :  [1,1,1,1],
+      "EaseIn": [
+
+
+      ],
+
+      "EaseOut": [
+
+      ],
+
+      "EaseUpdate": [
+
+      ],
+      "EaseCollision": [
+      ]
+    },
+     "HaveCoin": {
+      "UIType": "FontUI",
+      "FontPath": "",
+      "Pos":[ 120, 960 ],
+      "Color" :  [1,1,1,1],
+      "Size": 50,
+      "FontColor": [ 0, 0, 0, 1 ],
+      "FontScale" : 0.3,
+      "Text" : "25",
+     
+      
+      "EaseIn": [ ],
+      "EaseOut": [ ],
+       "EaseUpdate": []
+    },
+  "Tuto": {
+      "UIType": "CollisionUI",
+      "TexturePath": "UI/UITexture/GameMain/yubisasi01.png",
+      "Pos": [ 250, 480 ],
+      "Size": [ 200, 200 ],
+      "Color" :  [1,1,1,0],
+      "EaseIn": [
+         { "UIState": "Color","Change": [1,1,1,1],"EasingType": "Liner","Frame": 30}
+
+      ],
+
+      "EaseOut": [
+        { "UIState": "Color","Change": [1,1,1,0],"EasingType": "Liner","Frame": 20}
+      ],
+
+      "EaseUpdate": [
+         { "UIState": "Pos","Change": [ 300,  150],"EasingType": "ExpoOut","Frame": 40},
+         
+         { "UIState": "Pos","Change": [ 50, 580 ],"EasingType": "ExpoOut","Frame":40},
+         { "UIState": "Pos","Change": [ 400, 500 ],"EasingType": "ExpoOut","Frame": 40}
+      ],
+    "EaseCollision": [
+    ]
+
+    }
+  
+  },
+  
+  "Result": {
+
+  }
+
+}

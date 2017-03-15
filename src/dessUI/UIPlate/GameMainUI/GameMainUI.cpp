@@ -1,9 +1,5 @@
 #include "GameMainUI.h"
 
-
-
-
-
 void GameMainUI::setup(const dess::SceneName & name)
 {
 	UIPlate::setup(name);
@@ -11,6 +7,7 @@ void GameMainUI::setup(const dess::SceneName & name)
 	ui_data["HPGauge"]->setActive(true);
 	ui_data["Life"]->setActive(true);
 	ui_data["Coin"]->setActive(true);
+	ui_data["HaveCoin"]->setActive(true);
 }
 
 void GameMainUI::update(const float& delta_time)

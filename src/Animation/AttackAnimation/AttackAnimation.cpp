@@ -62,7 +62,7 @@ void AttackAnimation::drawDamage()
 			size.x,
 			size.y));
 
-	ci::gl::draw(TEX.get("Slashing"), drawRect);
+	ci::gl::draw(TEX.get("Slashing"),drawRect);
 	TEX.get("Slashing")->unbind();
 	ci::gl::color(1, 1, 1, 1);
 	ci::gl::popModelMatrix();

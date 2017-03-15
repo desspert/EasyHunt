@@ -4,6 +4,7 @@
 #include "../../../SoundManager.h"
 #include "../../../Animation/Animation.h"
 #include "../../../Animation/Production/Gasya/Gasya.h"
+#include "../../../Animation/Production/Tap/Tap.h"
 class SelectUI : public UIPlate
 { 
 private:
